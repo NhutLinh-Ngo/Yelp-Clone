@@ -13,6 +13,7 @@ class Business(db.Model):
     address = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), nullable=False)
     country = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(255), nullable=False)
     zip = db.Column(db.String(20), nullable=False)
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
@@ -22,9 +23,7 @@ class Business(db.Model):
     phone_number = db.Column(db.String(14), nullable=False)
     business_type = db.Column(db.String(100), nullable=False)
     business_web_page = db.Column(db.String(255))
-    open_hour = db.Column(db.String(10), nullable=False)
-    close_hour = db.Column(db.String(10), nullable=False)
-    closed_days = db.Column(db.String(20), nullable=False)
+    operation_hours = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
@@ -41,19 +40,17 @@ class Business(db.Model):
             'id': self.id,
             'owner_id': self.owner_id,
             'address': self.address,
+            'state': self.state,
+            'city': self.city,
             'country': self.country,
             'zip': self.zip,
-            'lat': self.lat,
-            'lng': self.lng,
             'name': self.name,
             'description': self.description,
             'price': self.price,
             'phone_number': self.phone_number,
             'business_type': self.business_type,
             'business_web_page': self.business_web_page,
-            'open_hour': self.open_hour,
-            'close_hour': self.close_hour,
-            'closed_days': self.closed_days,
+            'operation_hours': self.operation_hours,
             'created_at': self.created_at,
             'updated_at': self.updatetd_at
         }
@@ -64,6 +61,8 @@ class Business(db.Model):
             'owner_id': self.owner_id,
             'address': self.address,
             'country': self.country,
+            'state': self.state,
+            'city': self.city,
             'zip': self.zip,
             'name': self.name,
             'description': self.description,
@@ -71,8 +70,7 @@ class Business(db.Model):
             'phone_number': self.phone_number,
             'business_type': self.business_type,
             'business_web_page': self.business_web_page,
-            'open_hour': self.open_hour,
-            'close_hour': self.close_hour,
+            'operation_hours': self.operation_hours,
             'closed_days': self.closed_days
         }
 

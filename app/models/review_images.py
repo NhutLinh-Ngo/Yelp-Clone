@@ -12,7 +12,6 @@ class ReviewImages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     review_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("reviews.id")), nullable=False)
     url = db.Column(db.String(255), nullable=False)
-    preview = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
@@ -25,6 +24,5 @@ class ReviewImages(db.Model):
         return{
             'id': self.id,
             'review_id': self.business_id,
-            'url': self.url,
-            'preview': self.preview
+            'url': self.url
         }

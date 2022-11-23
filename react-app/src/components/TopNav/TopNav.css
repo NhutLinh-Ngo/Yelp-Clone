@@ -1,5 +1,4 @@
 .top-nav-wrapper{
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     padding: 24px 40px 0;
@@ -14,6 +13,7 @@
 .top-nav-navlink-wrapper{
     display: flex;
     gap: 0.3rem;
+    align-items: center;
 }
 
 .top-nav-navlink-button{
@@ -36,4 +36,26 @@
 
 .login-button:hover{
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.nav-link-redirect{
+    color: black;
+    margin-right: 0.7rem;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+}
+
+
+.nav-link-redirect:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropped-down{
+    position: fixed;
+    height: 100px;
+    width: 150px;
+    top: 50px;
+    right: 30px;
+    text-decoration: none;
 }

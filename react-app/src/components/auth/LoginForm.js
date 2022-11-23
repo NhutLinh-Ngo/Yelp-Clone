@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import './auth.css';
 
@@ -8,6 +8,7 @@ const LoginForm = () => {
 	const [errors, setErrors] = useState([]);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [haveErrors, setHaveErrors] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -15,7 +16,9 @@ const LoginForm = () => {
 	const onLogin = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(email, password));
+		console.log(data);
 		if (data) {
+			setHaveErrors(true);
 			setErrors(data);
 		}
 	};
@@ -37,6 +40,28 @@ const LoginForm = () => {
 
 	return (
 		<div className="login-page-wrapper center">
+			<div className="top-red-bar-redirect center">
+				<NavLink className="nav-link" to="/">
+					LOGOs GOES HERE /auth/loginForm
+				</NavLink>
+			</div>
+			{haveErrors && (
+				<div className="error-box center">
+					{Object.values(errors).length > 0 && (
+						<div className="login-form-error">
+							<span className="unable-to-login">
+								{errors.email ? errors.email : errors.password}
+							</span>
+						</div>
+					)}
+					<p
+						className="close-form-error-message"
+						onClick={() => setHaveErrors(false)}
+					>
+						X
+					</p>
+				</div>
+			)}
 			<div className="center login-page-inner-wrapper">
 				<div className="login-page-left-col center">
 					<div className="login-form-wrapper">
@@ -51,11 +76,6 @@ const LoginForm = () => {
 							</div>
 						</div>
 						<form onSubmit={onLogin}>
-							<div>
-								{errors.map((error, ind) => (
-									<div key={ind}>{error}</div>
-								))}
-							</div>
 							<div>
 								<input
 									name="email"
@@ -91,7 +111,7 @@ const LoginForm = () => {
 				</div>
 				<div className="login-page-right-col">
 					<img
-						style={{ height: '200px', width: '250px' }}
+						style={{ height: '250px', width: '350px' }}
 						src="https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png"
 					/>
 				</div>

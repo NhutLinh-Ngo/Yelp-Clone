@@ -42,5 +42,5 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email,
             'created_at': self.created_at,
-            'updated_at': self.updatetd_at
+            'updated_at': self.updated_at
         }

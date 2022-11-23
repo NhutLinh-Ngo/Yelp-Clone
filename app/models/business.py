@@ -52,7 +52,7 @@ class Business(db.Model):
             'business_web_page': self.business_web_page,
             'operation_hours': self.operation_hours,
             'created_at': self.created_at,
-            'updated_at': self.updatetd_at
+            'updated_at': self.updated_at
         }
 
     def to_dict_cord(self):

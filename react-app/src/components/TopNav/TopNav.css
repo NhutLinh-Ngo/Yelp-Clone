@@ -1,0 +1,39 @@
+.top-nav-wrapper{
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 40px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+}
+
+.top-nav-navlink-wrapper{
+    display: flex;
+    gap: 0.3rem;
+}
+
+.top-nav-navlink-button{
+    height: 33px;
+    width: 70px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+.signup-button{
+    color: white;
+    background-color: #E00707;
+    border: 1px solid #E00707;
+}
+
+.login-button{
+    border: 1px solid red;
+    color: #E00707;
+}
+
+.login-button:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}

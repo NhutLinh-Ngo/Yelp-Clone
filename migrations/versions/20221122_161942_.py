@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3eb31ce98a3b
+Revision ID: e536a445963a
 Revises: 
-Create Date: 2022-11-22 14:45:37.441770
+Create Date: 2022-11-22 16:19:42.964961
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3eb31ce98a3b'
+revision = 'e536a445963a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,18 +35,17 @@ def upgrade():
     sa.Column('address', sa.String(length=100), nullable=False),
     sa.Column('city', sa.String(length=100), nullable=False),
     sa.Column('country', sa.String(length=100), nullable=False),
+    sa.Column('state', sa.String(length=255), nullable=False),
     sa.Column('zip', sa.String(length=20), nullable=False),
     sa.Column('lat', sa.Float(), nullable=True),
     sa.Column('lng', sa.Float(), nullable=True),
-    sa.Column('name', sa.String(length=200), nullable=False),
+    sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('phone_number', sa.String(length=14), nullable=False),
-    sa.Column('business_type', sa.String(length=100), nullable=False),
+    sa.Column('business_type', sa.String(length=255), nullable=False),
     sa.Column('business_web_page', sa.String(length=255), nullable=True),
-    sa.Column('open_hour', sa.String(length=10), nullable=False),
-    sa.Column('close_hour', sa.String(length=10), nullable=False),
-    sa.Column('closed_days', sa.String(length=20), nullable=False),
+    sa.Column('operation_hours', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),

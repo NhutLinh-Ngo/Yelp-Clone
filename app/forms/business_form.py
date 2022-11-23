@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, TextAreaField
-from wtforms.validators import DataRequired, URL
+from wtforms.validators import DataRequired, URL, NumberRange
 from app.models import Business
 
 
@@ -18,3 +18,4 @@ class BusinessForm(FlaskForm):
     business_type = StringField('business_type', validators=[DataRequired('what do you specialize in? (Japanese cuisine, Italian...).')])
     business_web_page = StringField('business_web_page', validators=[URL(message='Pleas enter a valid URL to your restaurant menu.')])
     operation_hours = StringField('operation_hours', validators=[DataRequired('Let everyone know about your business hours.')])
+    price = IntegerField('price', validators=[DataRequired('Please enter a price.')])

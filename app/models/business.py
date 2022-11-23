@@ -17,11 +17,11 @@ class Business(db.Model):
     zip = db.Column(db.String(20), nullable=False)
     lat = db.Column(db.Float)
     lng = db.Column(db.Float)
-    name = db.Column(db.String(200), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     phone_number = db.Column(db.String(14), nullable=False)
-    business_type = db.Column(db.String(100), nullable=False)
+    business_type = db.Column(db.String(255), nullable=False)
     business_web_page = db.Column(db.String(255))
     operation_hours = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -35,7 +35,7 @@ class Business(db.Model):
         # business's images
     business_images = db.relationship("BusinessImages", back_populates="business")
 
-    def to_dict_all(self):
+    def to_dict(self):
         return{
             'id': self.id,
             'owner_id': self.owner_id,
@@ -53,25 +53,6 @@ class Business(db.Model):
             'operation_hours': self.operation_hours,
             'created_at': self.created_at,
             'updated_at': self.updatetd_at
-        }
-
-    def to_dict_about(self):
-        return{
-            'id': self.id,
-            'owner_id': self.owner_id,
-            'address': self.address,
-            'country': self.country,
-            'state': self.state,
-            'city': self.city,
-            'zip': self.zip,
-            'name': self.name,
-            'description': self.description,
-            'price': self.price,
-            'phone_number': self.phone_number,
-            'business_type': self.business_type,
-            'business_web_page': self.business_web_page,
-            'operation_hours': self.operation_hours,
-            'closed_days': self.closed_days
         }
 
     def to_dict_cord(self):

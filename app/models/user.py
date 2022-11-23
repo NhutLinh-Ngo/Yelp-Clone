@@ -44,3 +44,9 @@ class User(db.Model, UserMixin):
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
+    def to_dict_owner(self):
+        return{
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name
+        }

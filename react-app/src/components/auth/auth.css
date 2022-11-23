@@ -75,13 +75,14 @@ color: #999999;
     font-weight: bold;
 }
 .error-box{
-    margin-top: 65px;
     height: 45px;
     width: 600px;
     font-size: 0.9rem;
     background-color: #FCD6D3;
     justify-content: space-between;
     padding: 0 1rem;
+    position: absolute;
+    top: 65px;
 }
 
 .close-form-error-message{

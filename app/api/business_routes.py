@@ -5,7 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 from app.models import Business, BusinessImages, Review, ReviewImages, User
 from app.forms import BusinessForm
-
+from sqlalchemy import orm
 
 
 business_routes = Blueprint('business', __name__)
@@ -14,10 +14,16 @@ business_routes = Blueprint('business', __name__)
 def get_all_business():
     """
     Query for all business and return them in a list of business dictionaries
+    also query for preview image and the owner
     """
-
     businesses = Business.query.all()
-    return{'businesses': businesses.to_dict(), 'owner': businesses.owner.to_dict()}
+    res = []
+    for business in businesses:
+        json_each_business = business.to_dict()
+        json_each_business['images'] = [image.to_dict() for image in business.business_images]
+        json_each_business['owner'] =  business.owner.to_dict_owner()
+        res.append(json_each_business)
+    return{'businesses': res}
 
 
 @business_routes.route('', methods=['POST'])

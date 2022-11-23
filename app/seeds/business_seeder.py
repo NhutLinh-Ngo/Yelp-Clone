@@ -18,7 +18,40 @@ def seed_businesses():
         operation_hours='Mon-11:30-21:30,Tue-11:30-21:30,Wed-11:30-21:30,Thru-11:30-21:30,Fri-11:30-21:30,Sat-11:30-21:30,Sun-11:30-21:30'
     )
 
+    Thristy = Business(
+        owner_id=3,
+        address='17500 Castleton St',
+        city='City of Industry',
+        state='CA',
+        country='USA',
+        zip='91748',
+        name='Thristy Cow Korean BBQ',
+        description='We became Thirsty Cow with a philosophy to stay ahead of others by delivering exceptional service and quality food. We are proud to say that we provide USDA Prime/Choice cuts and daily fresh ingredients. We are a new standard of AYCE.',
+        price=45,
+        phone_number='(626) 581-0006',
+        business_type='Korean, Barbeque',
+        operation_hours='Mon-17:00-21:45,Tue-17:00-21:45,Wed-17:00-21:45,Thru-17:00-21:45,Fri-17:00-22:30,Sat-11:00-22:30,Sun-11:00-21:30',
+        business_web_page='https://www.thirstycowbbq.com'
+    )
+
+    nhaTrang = Business(
+        owner_id=2,
+        address='311 E Valley Blvd Ste 103',
+        city='San Gabriel',
+        state='CA',
+        country='USA',
+        zip='91776',
+        name='Quan Ngon Nha Tra',
+        description='Seven items menu of best vietnamese cuisine.',
+        price=20,
+        phone_number='(626) 572-7638',
+        business_type='Vietnamese, Chinese',
+        operation_hours='Mon-08:00-21:00,Tue-08:00-21:00,Wed-08:00-21:00,Thru-08:00-21:00,Fri-08:00-21:00,Sat-08:00-21:00,Sun-08:00-21:00'
+    )
+
+    db.session.add(nhaTrang)
     db.session.add(yinTang)
+    db.session.add(Thristy)
     db.session.commit()
 
 

@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-
+from .review import Review
 
 class Business(db.Model):
     __tablename__ = 'businesses'
@@ -52,7 +52,10 @@ class Business(db.Model):
             'business_web_page': self.business_web_page,
             'operation_hours': self.operation_hours,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'images': self.get_images(),
+            'owner': self.owner.to_dict_owner(),
+            'avgRating': self.avg_rating()
         }
 
     def to_dict_cord(self):
@@ -61,3 +64,10 @@ class Business(db.Model):
             'lat': self.lat,
             'lng': self.lng
         }
+
+    def avg_rating(self):
+        return round(sum([review.stars for review in self.business_reviews]) / len(self.business_reviews),2)
+
+
+    def get_images(self):
+        return [image.to_dict() for image in self.business_images]

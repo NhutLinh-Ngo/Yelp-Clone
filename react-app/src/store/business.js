@@ -10,7 +10,8 @@ export const getAllBusiness = () => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		dispatch(loadBusinesses(data));
+		dispatch(loadBusinesses(data.businesses));
+		return data.businesses;
 	}
 };
 
@@ -19,7 +20,7 @@ export default function businessReducer(state = initialState, action) {
 	const newState = { ...state };
 	switch (action.type) {
 		case GET_ALL_BUSINESS:
-			newState.allBusinesses = nornalizeData(action.data);
+			newState.allBusinesses = nornalizeData(action.businesses);
 			return newState;
 		default:
 			return state;

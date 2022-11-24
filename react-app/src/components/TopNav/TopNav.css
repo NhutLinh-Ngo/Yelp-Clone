@@ -30,16 +30,18 @@
 }
 
 .login-button{
-    border: 1px solid red;
-    color: #E00707;
+    border: 1px solid rgb(234, 234, 234);
+    /* color: rgb(234, 234, 234); */
+    color: white;
 }
 
 .login-button:hover{
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.2)
 }
 
 .nav-link-redirect{
-    color: black;
+    /* color: rgb(234, 234, 234); */
+    color: white;
     margin-right: 0.7rem;
     font-size: 0.8rem;
     padding: 0.3rem 0.5rem;
@@ -48,7 +50,7 @@
 
 
 .nav-link-redirect:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .nav-dropped-down{

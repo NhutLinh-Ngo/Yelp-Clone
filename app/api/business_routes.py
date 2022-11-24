@@ -17,13 +17,7 @@ def get_all_business():
     also query for preview image and the owner
     """
     businesses = Business.query.all()
-    res = []
-    for business in businesses:
-        json_each_business = business.to_dict()
-        json_each_business['images'] = [image.to_dict() for image in business.business_images]
-        json_each_business['owner'] =  business.owner.to_dict_owner()
-        res.append(json_each_business)
-    return{'businesses': res}
+    return{'businesses': [business.to_dict() for business in businesses]}
 
 
 @business_routes.route('', methods=['POST'])

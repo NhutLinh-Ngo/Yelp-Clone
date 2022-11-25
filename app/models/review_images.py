@@ -23,6 +23,6 @@ class ReviewImages(db.Model):
     def to_dict(self):
         return{
             'id': self.id,
-            'review_id': self.business_id,
+            'review_id': self.review_id,
             'url': self.url
         }

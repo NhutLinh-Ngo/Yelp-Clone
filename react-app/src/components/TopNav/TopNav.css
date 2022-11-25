@@ -2,12 +2,13 @@
     display: flex;
     justify-content: space-between;
     padding: 24px 40px 0;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: fit-content;
     box-sizing: border-box;
+    z-index: 1;
 }
 
 .top-nav-navlink-wrapper{

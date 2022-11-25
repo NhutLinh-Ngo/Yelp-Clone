@@ -29,7 +29,7 @@ def seed_review_images():
         url='https://s3-media0.fl.yelpcdn.com/bphoto/HB3kkUvQ14BGQ1KIq_4_sg/o.jpg',
     )
     review_image_7 = ReviewImages(
-        review_id=4,
+        review_id=5,
         url='https://s3-media0.fl.yelpcdn.com/bphoto/oRBANhbG6_0MaVrjuiaSNA/o.jpg',
     )
     review_image_8 = ReviewImages(

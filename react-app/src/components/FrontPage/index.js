@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllBusiness } from '../../store/business';
+import FrontPageReviews from '../FrontPageReviews';
 import './FrontPage.css';
 
 const FrontPage = () => {
@@ -12,6 +13,8 @@ const FrontPage = () => {
 	useEffect(() => {
 		const get = async () => {
 			const data = await dispatch(getAllBusiness());
+
+			// generate 3 random business to display on front page
 			let shuffled = data.sort(function () {
 				return 0.5 - Math.random();
 			});
@@ -31,7 +34,7 @@ const FrontPage = () => {
 					return (
 						<>
 							<div className="front-page-preview-wrapper">
-								<img src={previewImage[0].url} />
+								<img src={previewImage[0].url} className="front-page-images" />
 								<NavLink
 									to={`/${each.id}`}
 									className="nav-link preview-image-nav-link"
@@ -43,7 +46,7 @@ const FrontPage = () => {
 					);
 				})}
 			</div>
-			<h1>Front Page</h1>
+			<FrontPageReviews />
 		</div>
 	);
 };

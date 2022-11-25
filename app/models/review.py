@@ -26,10 +26,16 @@ class Review(db.Model):
     def to_dict(self):
         return{
             'id': self.id,
-            'business_id': self.business_id,
+            'business_id': self.Business_id,
             'user.id': self.user_id,
             'stars': self.stars,
             'review': self.review,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
+
+    def get_reviewer(self):
+        return self.user.to_dict_owner()
+
+    def get_review_images(self):
+        return [image.to_dict() for image in self.review_images]

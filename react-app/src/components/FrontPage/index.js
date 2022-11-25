@@ -27,13 +27,13 @@ const FrontPage = () => {
 	return (
 		<div className="front-page-wrapper">
 			<div className="front-page-images-wrapper">
-				{selected.map((each) => {
+				{selected.map((each, i) => {
 					const previewImage = each.images.filter(
 						(image) => image.preview == true
 					);
 					return (
 						<>
-							<div className="front-page-preview-wrapper">
+							<div className="front-page-preview-wrapper" key={i}>
 								<img src={previewImage[0].url} className="front-page-images" />
 								<NavLink
 									to={`/${each.id}`}

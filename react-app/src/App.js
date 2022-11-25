@@ -6,6 +6,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import TopNav from './components/TopNav';
 import FrontPage from './components/FrontPage';
 import { authenticate } from './store/session';
+import SingleBusinessDetailsPage from './components/SingleBusinessDetailsPage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -34,6 +35,10 @@ function App() {
 				<Route path="/" exact={true}>
 					<TopNav />
 					<FrontPage />
+				</Route>
+				<Route path="/:businessId">
+					<TopNav black={true} />
+					<SingleBusinessDetailsPage />
 				</Route>
 			</Switch>
 		</BrowserRouter>

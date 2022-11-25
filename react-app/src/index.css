@@ -5,6 +5,7 @@ body{
     box-sizing: border-box;
     width: 100%;
     font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    overflow-x: hidden;
 }
 
 .center{
@@ -18,7 +19,6 @@ body{
     text-decoration: none;
 }
 
-
-.box{
-    box-sizing: border-box;
+* {
+    box-sizing: border-box
 }

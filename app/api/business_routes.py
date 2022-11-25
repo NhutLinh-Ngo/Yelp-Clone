@@ -50,6 +50,17 @@ def create_new_business():
         return new_business.to_dict()
 
 
+
+@business_routes.route('/<int:id>')
+def get_business_by_id(id):
+    """
+    query for a single business information based on their Id
+    includes all images from reviews and images that business owner posted
+    """
+    single_business = Business.query.get(id)
+    return {'business': single_business.to_dict_single()}
+
+
 @business_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_business(id):

@@ -58,6 +58,28 @@ class Business(db.Model):
             'avgRating': self.avg_rating()
         }
 
+    def to_dict_single(self):
+        return{
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'address': self.address,
+            'state': self.state,
+            'city': self.city,
+            'country': self.country,
+            'zip': self.zip,
+            'name': self.name,
+            'description': self.description,
+            'price': self.price,
+            'phone_number': self.phone_number,
+            'business_type': self.business_type,
+            'business_web_page': self.business_web_page,
+            'operation_hours': self.operation_hours,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'avgRating': self.avg_rating(),
+            'allImages': self.get_all_images_on_business()
+        }
+
     def to_dict_cord(self):
         return{
             'id': self.id,
@@ -71,3 +93,20 @@ class Business(db.Model):
 
     def get_images(self):
         return [image.to_dict() for image in self.business_images]
+
+    def get_all_images_on_business(self):
+        """
+        Using relationship attributes, query for all images that related to the business
+        and reduce to only the URL for easy display in the front end later.
+        """
+        images_url_by_owner = [each_image['url'] for each_image in [image.to_dict() for image in self.business_images]]
+
+        # Get images for each review
+        images_from_reviews = [review.get_review_images() for review in self.business_reviews]
+
+        #extract url for all images on each review
+        images_url_from_reviews = [ image['url']  for review_images in images_from_reviews for image in review_images]
+
+        # concantenate images from owner and all reviews
+        all_images = images_url_from_reviews + images_url_by_owner
+        return all_images

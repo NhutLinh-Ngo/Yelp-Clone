@@ -1,8 +1,21 @@
 const GET_ALL_BUSINESS = 'business/GET_ALL_BUSINESS';
+const GET_SINGLE_BUSINESS = 'business/GET_SINGLE_BUSINESS';
+const CLEAN_UP_SINGLE_BUSINESS = 'business/CLEAN_UP_SINGLE_BUSINESS';
 
 const loadBusinesses = (businesses) => ({
 	type: GET_ALL_BUSINESS,
 	businesses
+});
+
+const loadBusiness = (business) => ({
+	type: GET_SINGLE_BUSINESS,
+	business
+});
+
+// clean up function to clear single business page when unmount, prevent delay when switching
+// between business
+export const singleBusinessCleanUp = () => ({
+	type: CLEAN_UP_SINGLE_BUSINESS
 });
 
 export const getAllBusiness = () => async (dispatch) => {
@@ -15,12 +28,28 @@ export const getAllBusiness = () => async (dispatch) => {
 	}
 };
 
-const initialState = { allBusinesses: {} };
+export const getSingleBusiness = (businessId) => async (dispatch) => {
+	const response = await fetch(`/api/business/${businessId}`);
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(loadBusiness(data.business));
+		return data.business;
+	}
+};
+
+const initialState = { allBusinesses: {}, singleBusiness: {} };
 export default function businessReducer(state = initialState, action) {
 	const newState = { ...state };
 	switch (action.type) {
 		case GET_ALL_BUSINESS:
 			newState.allBusinesses = nornalizeData(action.businesses);
+			return newState;
+		case GET_SINGLE_BUSINESS:
+			newState.singleBusiness = action.business;
+			return newState;
+		case CLEAN_UP_SINGLE_BUSINESS:
+			newState.singleBusiness = {};
 			return newState;
 		default:
 			return state;

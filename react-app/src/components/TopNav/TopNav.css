@@ -39,7 +39,6 @@
 .login-button:hover{
     background-color: rgba(255, 255, 255, 0.2)
 }
-
 .nav-link-redirect{
     /* color: rgb(234, 234, 234); */
     color: white;
@@ -54,6 +53,13 @@
     background-color: rgba(255, 255, 255, 0.3);
 }
 
+.black-color{
+    color: black;
+}
+
+.black-color:hover{
+    background-color: rgba(0, 0, 0, 0.1)
+}
 .nav-dropped-down{
     position: fixed;
     height: 100px;

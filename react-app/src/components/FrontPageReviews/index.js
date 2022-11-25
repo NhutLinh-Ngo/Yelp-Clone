@@ -29,8 +29,8 @@ const FrontPageReviews = () => {
 		<div className="recent-reviews-wrapper center">
 			<h2>Recent Activity</h2>
 			<div className="recent-reviews-container">
-				{selected.map((review) => (
-					<ReviewCard key={review.id} review={review} />
+				{selected.map((review, i) => (
+					<ReviewCard key={i} review={review} />
 				))}
 			</div>
 		</div>

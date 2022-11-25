@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './TopNav.css';
 
-const TopNav = () => {
+const TopNav = ({ black }) => {
 	const user = useSelector((state) => state.session.user);
 	const [showMenu, setShowMenu] = useState(false);
 
@@ -33,10 +33,16 @@ const TopNav = () => {
 				</NavLink>
 			</div>
 			<div className="top-nav-navlink-wrapper">
-				<NavLink to="/login" className="nav-link nav-link-redirect">
+				<NavLink
+					to="/login"
+					className={`nav-link nav-link-redirect ${black ? 'black-color' : ''}`}
+				>
 					For businesses
 				</NavLink>
-				<NavLink to="/login" className="nav-link nav-link-redirect">
+				<NavLink
+					to="/login"
+					className={`nav-link nav-link-redirect ${black ? 'black-color' : ''}`}
+				>
 					write a review
 				</NavLink>
 				{!user && (
@@ -44,7 +50,9 @@ const TopNav = () => {
 						<NavLink
 							to="/login"
 							exact={true}
-							className="nav-link top-nav-navlink-button login-button center"
+							className={`nav-link top-nav-navlink-button login-button center ${
+								black ? 'black-color' : ''
+							}`}
 						>
 							Log In
 						</NavLink>

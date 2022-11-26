@@ -69,3 +69,20 @@ def update_business(id):
     if the business, and must be logged in
     """
     pass
+
+@business_routes.route('/<int:id>/reviews')
+def get_reviews_on_business(id):
+    """
+    query for all the reviews on the business
+    """
+    business = Business.query.get(id)
+    res = []
+    if business:
+        reviews = business.business_reviews
+        for review in reviews:
+            res_review = review.to_dict()
+            review_images = review.get_review_images()
+            res_review['images'] = review_images
+            res_review['reviewer'] = review.get_reviewer()
+            res.append(res_review)
+    return {'reviews': res}

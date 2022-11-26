@@ -136,3 +136,58 @@
 .business-details-description{
     line-height: 2rem;
 }
+
+
+
+/* Review CSS */
+
+/* .business-reviews-wrapper{
+    border: 1px solid red;
+} */
+
+.business-review-card-container{
+    /* border: 2px solid purple; */
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding-bottom: 2rem;
+}
+#card-reviewer-name{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+#card-review-review{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+#card-review-images{
+    /* border: 3px solid orange; */
+    height: 136px;
+    display: flex;
+    column-gap: 1rem;
+}
+
+#card-review-stars{
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+}
+#card-review-date{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    margin-left: 1rem;
+}
+.card-review-single-image{
+    width: 174px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.fa-circle-user{
+    font-size: 50px;
+}

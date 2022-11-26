@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
-import { FaStar } from 'react-icons/fa';
+import BusinessReviews from './BusinessReviews';
 
 const BusinessDetailsBody = ({ business, operatingHours }) => {
+	const { businessId } = useParams();
 	let operating = business.operation_hours.split(',');
 	operating = operating.map((eachDay) => {
 		eachDay = eachDay.split('-');
@@ -23,12 +24,13 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 	});
 	const date = new Date();
 	const todayDay = date.toString().split(' ')[0]; // Mon, Tue, Wed....
-	console.log(business);
 	return (
 		<div className="business-details-body-wrapper">
 			<div className="business-details-container">
 				<div className="create-reviews-wrapper">
-					create Revew button goes here
+					<NavLink to={`/${businessId}/new-review`} className="nav-link">
+						<i class="fa-regular fa-star" /> Write a review
+					</NavLink>
 				</div>
 				<div className="business-details-block">
 					<h1>Hours</h1>
@@ -64,6 +66,7 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 				</div>
 				<div className="business-details-block">
 					<h1>Reviews</h1>
+					<BusinessReviews />
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { getSingleBusiness, singleBusinessCleanUp } from '../../store/business';
+import BusinessDetailsBody from './BusinessDetailsBody';
 import './SingleBusinessDetailsPage.css';
 
 function setPriceDollarSign(price) {
@@ -11,6 +12,13 @@ function setPriceDollarSign(price) {
 	else if (price > 60) return '$$$$';
 }
 
+function getColorForRating(rating) {
+	if (rating < 2) return 'oneStar';
+	if (rating < 3) return 'twoStars';
+	if (rating < 4) return 'threeStars';
+	if (rating < 5) return 'fourStars';
+	else return 'fiveStars';
+}
 const SingleBusinessDetailsPage = () => {
 	const { businessId } = useParams();
 	const business = useSelector((state) => state.business.singleBusiness);
@@ -46,7 +54,9 @@ const SingleBusinessDetailsPage = () => {
 			const openHour = todayHours[1].split(':'); //  ['11', '30']
 			const closeHour = todayHours[2].split(':'); // ['21', '30']
 			const openNow =
-				Number(openHour[0]) <= currentHour && Number(closeHour) >= currentHour;
+				Number(openHour[0]) <= currentHour &&
+				Number(closeHour[0]) >= currentHour;
+
 			openHour[1] =
 				Number(openHour[0]) > 11 ? openHour[1] + ' PM' : openHour[1] + ' AM';
 			closeHour[1] =
@@ -60,7 +70,8 @@ const SingleBusinessDetailsPage = () => {
 			dispatch(singleBusinessCleanUp());
 		};
 	}, []);
-
+	let rating = business.avgRating;
+	const color = getColorForRating(rating);
 	if (!Object.values(business).length) return null;
 	return (
 		<div className="business-details-page-wrapper center">
@@ -72,8 +83,15 @@ const SingleBusinessDetailsPage = () => {
 			</div>
 			<div className="business-details-header-wrapper">
 				<h1 className="business-details-name">{business.name}</h1>
-				<div className="business-details-total-reviews">
-					reviews goes here later
+				<div className={`business-details-total-reviews ${color}`}>
+					{[...Array(5)].map((star, i) => {
+						if (i < Math.floor(rating)) return <i class="fa-solid fa-star" />;
+						else if (rating % Math.floor(rating) >= 0.5) {
+							rating = 0;
+							return <i class="fa-regular fa-star-half-stroke" />;
+						} else return <i class="fa-regular fa-star" />;
+					})}
+					<div className="total-reviews">{business.totalReviews} reviews</div>
 				</div>
 				<div className="business-details-price-categories">
 					<div style={{ fontWeight: '400' }}>{priceRange}</div>
@@ -102,6 +120,10 @@ const SingleBusinessDetailsPage = () => {
 					</div>
 				</div>
 			</div>
+			<BusinessDetailsBody
+				business={business}
+				operatingHours={operatingHours}
+			/>
 		</div>
 	);
 };

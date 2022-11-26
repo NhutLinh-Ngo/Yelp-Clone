@@ -77,7 +77,8 @@ class Business(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'avgRating': self.avg_rating(),
-            'allImages': self.get_all_images_on_business()
+            'allImages': self.get_all_images_on_business(),
+            'totalReviews': self.total_reviews()
         }
 
     def to_dict_cord(self):
@@ -93,6 +94,10 @@ class Business(db.Model):
 
     def get_images(self):
         return [image.to_dict() for image in self.business_images]
+
+    def total_reviews(self):
+        return len(self.business_reviews)
+
 
     def get_all_images_on_business(self):
         """

@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-
+/* Business header CSS*/
 .business-details-images-container{
     height: 450px;
     width: 1940px;
@@ -15,7 +15,6 @@
     position: absolute;
     z-index: -1;
     top: 83.88px;
-    /* border: 5px solid red; */
 }
 .business-detail-faded-background{
     height: 450px;
@@ -38,7 +37,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 0.8rem;
-    height: 235px;
+    padding-bottom: 25px;
 }
 
 .business-details-name{
@@ -64,8 +63,76 @@
 }
 
 .open{
-    color: green;
+    color: #04C858;
 }
 .close{
     color: #FF8B87;
+}
+
+.business-details-total-reviews{
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.total-reviews{
+    color: white;
+    font-size: 1.3rem;
+    margin-left: 10px;
+}
+.oneStar {
+    color: rgb(255, 204, 75)
+}
+.twoStars {
+    color: rgb(255, 173, 72)
+}
+
+.threeStars{
+  color: rgb(255, 135, 66);
+}
+.fourStars{
+  color: rgb(255, 100, 61);
+}
+.fiveStars{
+  color: rgb(251, 67, 60);
+}
+/* Business header CSS END */
+
+/* Business details CSS */
+.business-details-body-wrapper{
+    /* border: 3px solid red; */
+    width: 1200px;
+}
+
+
+
+.business-details-block{
+    display: flex;
+    flex-direction: column;
+    /* border: 5px solid purple; */
+    padding: 2rem 0;
+    row-gap: 1rem;
+    border-top: 1px solid #ebebeb;
+}
+
+#day-of-week{
+    margin-right: 2rem;
+}
+
+#operation-hours-container{
+    display: flex;
+}
+#hours-of-operation{
+    display: flex;
+    column-gap: 1.3rem;
+}
+
+#each-day{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.7rem;
+}
+
+.business-details-description{
+    line-height: 2rem;
 }

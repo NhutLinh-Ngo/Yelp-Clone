@@ -4,8 +4,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 
 from app.models import Business, BusinessImages, Review, ReviewImages, User
-from app.forms import BusinessForm
+from app.forms import BusinessForm, ReviewForm
 from sqlalchemy import orm
+from .auth_routes import validation_errors_to_error_messages
 
 
 business_routes = Blueprint('business', __name__)
@@ -86,3 +87,27 @@ def get_reviews_on_business(id):
             res_review['reviewer'] = review.get_reviewer()
             res.append(res_review)
     return {'reviews': res}
+
+
+@business_routes.route('/<int:id>/reviews', methods=['POST'])
+@login_required
+def create_new_review_for_business(id):
+    """
+    create new review for business
+    """
+    business = Business.query.get(id)
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if business:
+        if form.validate_on_submit():
+            new_review = Review(
+                Business_id = form['Business_id'],
+                user_id = form['user_id'],
+                review = form['review'],
+                stars = form['stars']
+            )
+            db.session.add(new_review)
+            db.session.commit()
+            return new_review.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': {'message':'business does not exists.'}}, 404

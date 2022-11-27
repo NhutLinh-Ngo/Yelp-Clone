@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 
 
-from app.models import Business, BusinessImages, Review, ReviewImages, User
+from app.models import Business, BusinessImages, Review, ReviewImages, User, db
 from app.forms import BusinessForm, ReviewForm
 from sqlalchemy import orm
 from .auth_routes import validation_errors_to_error_messages
@@ -101,10 +101,10 @@ def create_new_review_for_business(id):
     if business:
         if form.validate_on_submit():
             new_review = Review(
-                Business_id = form['Business_id'],
-                user_id = form['user_id'],
-                review = form['review'],
-                stars = form['stars']
+                Business_id = form.data['Business_id'],
+                user_id = form.data['user_id'],
+                review = form.data['review'],
+                stars = form.data['stars']
             )
             db.session.add(new_review)
             db.session.commit()

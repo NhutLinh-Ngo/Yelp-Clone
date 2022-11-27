@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 
 
-from app.models import Business, BusinessImages, Review, ReviewImages, User
+from app.models import Business, BusinessImages, Review, ReviewImages, User,db
 from app.forms import ReviewImageForm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -43,8 +43,8 @@ def add_review_images(id):
     if review:
         if form.validate_on_submit():
             new_review_image = ReviewImages(
-                review_id = form['review_id'],
-                url = form['url']
+                review_id = form.data['review_id'],
+                url = form.data['url']
             )
 
             db.session.add(new_review_image)

@@ -30,6 +30,48 @@ export const getSingleBusinessReviews = (id) => async (dispatch) => {
 		return data.reviews;
 	}
 };
+
+export const postNewReview = (reviewData) => async (dispatch) => {
+	const { Business_id } = reviewData;
+	const response = await fetch(`/api/business/${Business_id}/reviews`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(reviewData)
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data;
+		}
+	}
+};
+
+export const postNewReviewImage = (imageData) => async (dispatch) => {
+	const { review_id } = imageData;
+	const response = await fetch(`/api/reviews/${review_id}/images`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(imageData)
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data;
+		}
+	}
+};
+
 const initialstate = { allReviews: {}, businessReviews: {} };
 export default function reviewReducer(state = initialstate, action) {
 	const newState = { ...state };

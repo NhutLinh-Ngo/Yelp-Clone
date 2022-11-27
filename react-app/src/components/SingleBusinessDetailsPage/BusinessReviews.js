@@ -21,7 +21,6 @@ const BusinessReviews = () => {
 	return (
 		<div className="business-reviews-wrapper">
 			{reviews.map((review) => {
-				let reviewText = review.review.split('\n');
 				const reviewDate = new Date(review.created_at).toLocaleDateString();
 				return (
 					<div className="business-review-card-container">
@@ -33,11 +32,7 @@ const BusinessReviews = () => {
 							<ReviewStarsDisplay rating={review.stars} />{' '}
 							<p id="card-review-date">{reviewDate}</p>
 						</div>
-						<div id="card-review-review">
-							{reviewText.map((reviewLine) => (
-								<div>{reviewLine}</div>
-							))}
-						</div>
+						<div id="card-review-review">{review.review}</div>
 						{review.images.length > 0 && (
 							<div id="card-review-images">
 								{review.images.map((image, i) => {

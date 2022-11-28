@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import stateOptions from '../../utils/state';
 import './BusinessFormPage.css';
-
+function isNumeric(num) {
+	return !isNaN(num);
+}
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const BusinessFormPage = () => {
 	const [name, setName] = useState('');
@@ -16,11 +18,12 @@ const BusinessFormPage = () => {
 	const [phone_number, setPhoneNumber] = useState('');
 	const [business_type, setBusinessType] = useState('');
 	const [business_web_page, setBusinessWebPage] = useState('');
-	const [operation_hours, setOperationHours] = useState('');
+	const [operation_hours, setOperationHours] = useState([]);
 	const [price, setPrice] = useState(0);
 	const [day, setDay] = useState('Mon');
 	const [openHour, setOpenHour] = useState('');
 	const [closeHour, setCloseHour] = useState('');
+	const [hourError, setHourError] = useState('');
 
 	const addHours = (e) => {
 		e.preventDefault();
@@ -104,8 +107,9 @@ const BusinessFormPage = () => {
 						onChange={(e) => setBusinessType(e.target.value)}
 					/>
 					<label className="business-form-label">
-						Hours (24h format, dont add hours for closed days.)
+						Hours (dont add hours for closed days.)
 					</label>
+					<div className="hour-error">{hourError}</div>
 					<div className="add-hours-wrapper">
 						<select
 							type="text"
@@ -120,19 +124,22 @@ const BusinessFormPage = () => {
 						</select>
 						<input
 							className="business-input-field-hour"
-							type="text"
+							type="time"
 							value={openHour}
 							name="openHour"
 							placeholder="09:00"
 							onChange={(e) => setOpenHour(e.target.value)}
+							maxLength="5"
 						/>
 						<input
 							className="business-input-field-hour"
-							type="text"
+							type="time"
 							value={closeHour}
 							name="closeHour"
 							placeholder="21:30"
 							onChange={(e) => setCloseHour(e.target.value)}
+							maxLength="5"
+							pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$"
 						/>
 						<button type="add-hour" onClick={addHours}>
 							Add Hours

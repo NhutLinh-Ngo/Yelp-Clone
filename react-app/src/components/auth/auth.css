@@ -12,7 +12,7 @@
     padding: 1rem;
 }
 .login-form-wrapper{
-    min-width: 200px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
 
@@ -53,7 +53,7 @@
 }
 
 .switch-form-bottom{
-    font-size: 10px;
+    font-size: 13px;
     display: flex;
     align-self: flex-end;
 }
@@ -98,4 +98,23 @@ color: #999999;
     height: 50px;
     background-color: #D32323;
     color: white;
+}
+.login-separator {
+    /* border: 1px solid blue; */
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 24px 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+}
+.login-separator:before,
+.login-separator:after {
+    content: "";
+    border-top: 1px solid;
+    flex: 1 0 20px;
+    color: #eeeeef;
 }

@@ -23,9 +23,14 @@ const LoginForm = () => {
 		}
 	};
 
+	const loginDemo = async (e) => {
+		await dispatch(login('demo@aa.io', 'password'));
+	};
+
 	const switchToSignUp = () => {
 		history.push('/signup');
 	};
+
 	const updateEmail = (e) => {
 		setEmail(e.target.value);
 	};
@@ -74,6 +79,12 @@ const LoginForm = () => {
 									Sign up
 								</p>
 							</div>
+						</div>
+						<button className="form-button login-demo" onClick={loginDemo}>
+							Continue with Demo
+						</button>
+						<div className="login-separator">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</div>
 						<form onSubmit={onLogin}>
 							<div>

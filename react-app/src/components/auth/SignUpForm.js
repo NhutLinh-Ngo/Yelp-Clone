@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp, login } from '../../store/session';
 
 const SignUpForm = () => {
 	const [errors, setErrors] = useState([]);
@@ -28,6 +28,10 @@ const SignUpForm = () => {
 			setHaveErrors(true);
 			setErrors(data);
 		}
+	};
+
+	const loginDemo = async (e) => {
+		await dispatch(login('demo@aa.io', 'password'));
 	};
 
 	const updateEmail = (e) => {
@@ -87,6 +91,12 @@ const SignUpForm = () => {
 									Log in
 								</p>
 							</div>
+						</div>
+						<button className="form-button login-demo" onClick={loginDemo}>
+							Continue with Demo
+						</button>
+						<div className="login-separator">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</div>
 						<form onSubmit={onSignUp}>
 							<div>

@@ -1,0 +1,25 @@
+.business-form{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 1rem;
+}
+
+
+.business-form-label{
+    font-size: 0.9rem;
+}
+.add-hours-wrapper{
+    display: flex;
+    column-gap: 1rem;
+}
+.business-input-field-hour{
+    width: 80px;
+}
+
+.business-form-textarea{
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+    height: 150px;
+}

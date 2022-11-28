@@ -8,6 +8,7 @@ import FrontPage from './components/FrontPage';
 import { authenticate } from './store/session';
 import SingleBusinessDetailsPage from './components/SingleBusinessDetailsPage';
 import ReviewFormPage from './components/ReviewFormPage';
+import BusinessFormPage from './components/BusinessFormPage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -36,6 +37,9 @@ function App() {
 				<Route path="/" exact={true}>
 					<TopNav />
 					<FrontPage />
+				</Route>
+				<Route path="/new-business">
+					<BusinessFormPage />
 				</Route>
 				<Route exact path="/:businessId">
 					<TopNav black={true} />

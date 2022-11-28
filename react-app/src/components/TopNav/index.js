@@ -34,7 +34,7 @@ const TopNav = ({ black }) => {
 			</div>
 			<div className="top-nav-navlink-wrapper">
 				<NavLink
-					to="/login"
+					to={`/${user ? 'new-business' : 'login'}`}
 					className={`nav-link nav-link-redirect ${black ? 'black-color' : ''}`}
 				>
 					For businesses

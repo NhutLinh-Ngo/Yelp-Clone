@@ -189,3 +189,18 @@
 .fa-circle-user{
     font-size: 50px;
 }
+
+.create-new-review-link{
+    padding: 0.8rem 1.8rem;
+    color: white;
+    text-decoration: none;
+    background-color: red;
+    border-radius: 5px;
+
+}
+
+.create-reviews-wrapper{
+    height: 100px;
+    display: flex;
+    align-items: center;
+}

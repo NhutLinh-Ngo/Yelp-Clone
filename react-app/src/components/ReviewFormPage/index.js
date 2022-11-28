@@ -124,8 +124,7 @@ const ReviewFormPage = () => {
 			setImageError(checkUrl);
 		}
 	};
-	if (!business)
-		return <h1>sorry the business your looking for does not exists</h1>;
+	if (!business) return null;
 	return (
 		<>
 			<div className="top-red-bar-redirect center">

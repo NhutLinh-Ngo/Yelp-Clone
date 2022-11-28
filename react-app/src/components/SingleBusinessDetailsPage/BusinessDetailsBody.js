@@ -28,7 +28,10 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 		<div className="business-details-body-wrapper">
 			<div className="business-details-container">
 				<div className="create-reviews-wrapper">
-					<NavLink to={`/${businessId}/new-review`} className="nav-link">
+					<NavLink
+						to={`/${businessId}/new-review`}
+						className="create-new-review-link"
+					>
 						<i class="fa-regular fa-star" /> Write a review
 					</NavLink>
 				</div>

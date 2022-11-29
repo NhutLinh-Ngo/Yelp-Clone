@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 
 from app.models import Business, BusinessImages, Review, ReviewImages, User, db
-from app.forms import BusinessForm, ReviewForm
+from app.forms import BusinessForm, ReviewForm, BusinessImageForm
 from sqlalchemy import orm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -112,3 +112,23 @@ def create_new_review_for_business(id):
             return new_review.to_dict()
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return {'errors': {'message':'business does not exists.'}}, 404
+
+
+@business_routes.route('/<int:id>/images', methods=['POST'])
+@login_required
+def add_business_images(id):
+    """
+    add images posted by owner.
+    """
+    form = BusinessImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_Image = BusinessImages(
+            business_id=form.data['business_id'],
+            preview = form.data['preview'],
+            url = form.data['url']
+        )
+        db.session.add(new_Image)
+        db.session.commit()
+        return new_Image.to_dict()
+    return {'error': 'Image Error'}

@@ -58,6 +58,25 @@ export const createNewBusiness = (businessData) => async (dispatch) => {
 	}
 };
 
+export const AddBusinessImage = (imagedata, businessId) => async () => {
+	const response = await fetch(`/api/business/${businessId}/images`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(imagedata)
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data;
+		}
+	}
+};
 const initialState = { allBusinesses: {}, singleBusiness: {} };
 export default function businessReducer(state = initialState, action) {
 	const newState = { ...state };

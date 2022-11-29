@@ -8,7 +8,7 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 	let operating = business.operation_hours.split(',');
 	operating = operating.map((eachDay) => {
 		eachDay = eachDay.split('-');
-		if (eachDay[1] !== 'closed') {
+		if (eachDay[1] !== 'Closed') {
 			const openHour = eachDay[1].split(':'); //  ['11', '30']
 			const closeHour = eachDay[2].split(':'); // ['21', '30']
 			openHour[1] =

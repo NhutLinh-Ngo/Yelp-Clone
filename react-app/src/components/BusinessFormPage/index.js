@@ -4,12 +4,37 @@ import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import stateOptions from '../../utils/state';
 import './BusinessFormPage.css';
 import { createNewBusiness } from '../../store/business';
-
-function isNumeric(num) {
-	return !isNaN(num);
-}
+import AddBusinessImages from './AddBusinessImages';
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+function formatPhoneNumber(value) {
+	// if input value is falsy eg if the user deletes the input, then just return
+	if (!value) return value;
+
+	// clean the input for any non-digit values.
+	const phoneNumber = value.replace(/[^\d]/g, '');
+
+	// phoneNumberLength is used to know when to apply our formatting for the phone number
+	const phoneNumberLength = phoneNumber.length;
+
+	// we need to return the value with no formatting if its less than four digits
+	// this is to avoid weird behavior that occurs if you  format the area code too early
+	if (phoneNumberLength < 4) return phoneNumber;
+
+	// if phoneNumberLength is greater than 4 and less the 7 we start to return
+	// the formatted number
+	if (phoneNumberLength < 7) {
+		return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+	}
+
+	// finally, if the phoneNumberLength is greater then seven, we add the last
+	// bit of formatting and return it.
+	return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+		3,
+		6
+	)}-${phoneNumber.slice(6, 10)}`;
+}
 
 const BusinessFormPage = () => {
 	const [name, setName] = useState('');
@@ -30,6 +55,8 @@ const BusinessFormPage = () => {
 	const [hourError, setHourError] = useState('');
 	const [displayHours, setDisplayHours] = useState([]);
 	const [errors, setErrors] = useState([]);
+	const [showImagesForm, setShowImagesForm] = useState(false);
+	const [businessId, setBusinessId] = useState('');
 	const user = useSelector((state) => state.session.user);
 
 	const dispatch = useDispatch();
@@ -100,10 +127,12 @@ const BusinessFormPage = () => {
 		}
 
 		const newBusiness = await dispatch(createNewBusiness(businessData));
+
 		if (newBusiness.errors) {
 			setErrors(newBusiness.errors);
 		} else {
-			history.push(`/${newBusiness.id}/add-images`);
+			setBusinessId(newBusiness.id);
+			setShowImagesForm(true);
 		}
 	};
 
@@ -116,175 +145,183 @@ const BusinessFormPage = () => {
 			</div>
 			<div className="business-form-container">
 				<div className="business-form-left-col">
-					<form className="business-form" onSubmit={handleBusinessFormSubmit}>
-						{/* ---------------------name------------------------------------------------------------------------------ */}
-						<label className="business-form-label">Business Name</label>
-						<input
-							className="business-input-field"
-							type="text"
-							name="name"
-							value={name}
-							placeholder="Dylan's bakery"
-							onChange={(e) => setName(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.name}</div>
-						{/* ---------------------address------------------------------------------------------------------------------ */}
-						<label className="business-form-label">Address</label>
-						<input
-							className="business-input-field"
-							type="text"
-							name="address"
-							value={address}
-							placeholder="123 Coke St"
-							onChange={(e) => setAddress(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.address}</div>
-						{/* ----------------------city------------------------------------------------------------------------------- */}
-						<label className="business-form-label">City</label>
-						<input
-							className="business-input-field"
-							type="text"
-							name="city"
-							value={city}
-							placeholder="San Francisco"
-							onChange={(e) => setCity(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.city}</div>
-						{/* ----------------------state------------------------------------------------------------------------------- */}
-						<label className="business-form-label">State</label>
-						<select
-							className="business-input-field"
-							type="text"
-							name="state"
-							value={state}
-							onChange={(e) => setState(e.target.value)}
-						>
-							{stateOptions.map((state) => (
-								<option value={state}>{state}</option>
-							))}
-						</select>
-						<div className="business-form-error">{errors.state}</div>
-						{/* -------------------------zip---------------------------------------------------------------------------- */}
-						<label className="business-form-label">Zip</label>
-						<input
-							className="business-input-field"
-							type="text"
-							name="zip"
-							value={zip}
-							placeholder="91705"
-							onChange={(e) => setZip(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.zip}</div>
-						{/* ----------------------------phone_number------------------------------------------------------------------------- */}
-						<label className="business-form-label">Phone</label>
-						<input
-							className="business-input-field"
-							type="text"
-							name="phone"
-							value={phone_number}
-							placeholder="(555) 555-5555"
-							onChange={(e) => setPhoneNumber(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.phone_number}</div>
-						{/* ------------------------web----------------------------------------------------------------------------- */}
-						<label className="business-form-label">Web Address</label>
-						<input
-							className="business-input-field"
-							type="text"
-							name="web_address"
-							value={business_web_page}
-							placeholder="https://www.companyaddress.com"
-							onChange={(e) => setBusinessWebPage(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.web}</div>
-						{/* -----------------------business_type------------------------------------------------------------------------------ */}
-						<label className="business-form-label">Categories</label>
-						<input
-							type="text"
-							className="business-input-field"
-							name="business_type"
-							value={business_type}
-							placeholder="Hot Pot, Barbeque, Italian, ..."
-							onChange={(e) => setBusinessType(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.business_type}</div>
-						{/* ------------------------------operation_hours----------------------------------------------------------------------- */}
-						<label className="business-form-label">
-							Hours (dont add hours for closed days.)
-						</label>
-						<div className="business-form-error">{hourError}</div>
-						<div className="display-hours-container">
-							{displayHours.map((each, i) => (
-								<div className="display-single-hour">
-									<div>{each[0]}</div>
-									<div>{each[1]}</div>
-									<div
-										className="remove-display-hour"
-										onClick={() => removeHour(i)}
-									>
-										remove
-									</div>
-								</div>
-							))}
-						</div>
-						<div className="add-hours-wrapper">
-							<select
+					{!showImagesForm && (
+						<form className="business-form" onSubmit={handleBusinessFormSubmit}>
+							{/* ---------------------name------------------------------------------------------------------------------ */}
+							<label className="business-form-label">Business Name</label>
+							<input
+								className="business-input-field"
 								type="text"
-								name="day"
-								value={day}
-								onChange={(e) => setDay(e.target.value)}
+								name="name"
+								value={name}
+								placeholder="Dylan's bakery"
+								onChange={(e) => setName(e.target.value)}
+							/>
+							<div className="business-form-error">{errors.name}</div>
+							{/* ---------------------address------------------------------------------------------------------------------ */}
+							<label className="business-form-label">Address</label>
+							<input
+								className="business-input-field"
+								type="text"
+								name="address"
+								value={address}
+								placeholder="123 Coke St"
+								onChange={(e) => setAddress(e.target.value)}
+							/>
+							<div className="business-form-error">{errors.address}</div>
+							{/* ----------------------city------------------------------------------------------------------------------- */}
+							<label className="business-form-label">City</label>
+							<input
+								className="business-input-field"
+								type="text"
+								name="city"
+								value={city}
+								placeholder="San Francisco"
+								onChange={(e) => setCity(e.target.value)}
+							/>
+							<div className="business-form-error">{errors.city}</div>
+							{/* ----------------------state------------------------------------------------------------------------------- */}
+							<label className="business-form-label">State</label>
+							<select
+								className="business-input-field"
+								type="text"
+								name="state"
+								value={state}
+								onChange={(e) => setState(e.target.value)}
 							>
-								{' '}
-								{days.map((day) => (
-									<option value={day}>{day}</option>
+								{stateOptions.map((state) => (
+									<option value={state}>{state}</option>
 								))}
 							</select>
+							<div className="business-form-error">{errors.state}</div>
+							{/* -------------------------zip---------------------------------------------------------------------------- */}
+							<label className="business-form-label">Zip</label>
 							<input
-								className="business-input-field-hour"
-								type="time"
-								value={openHour}
-								name="openHour"
-								onChange={(e) => setOpenHour(e.target.value)}
+								className="business-input-field"
+								type="text"
+								name="zip"
+								value={zip}
+								placeholder="91705"
+								onChange={(e) => setZip(e.target.value)}
 							/>
+							<div className="business-form-error">{errors.zip}</div>
+							{/* ----------------------------phone_number------------------------------------------------------------------------- */}
+							<label className="business-form-label">Phone</label>
 							<input
-								className="business-input-field-hour"
-								type="time"
-								value={closeHour}
-								name="closeHour"
-								onChange={(e) => setCloseHour(e.target.value)}
+								className="business-input-field"
+								type="text"
+								name="phone"
+								value={phone_number}
+								placeholder="(555) 555-5555"
+								onChange={(e) =>
+									setPhoneNumber(formatPhoneNumber(e.target.value))
+								}
 							/>
-							<button type="add-hour" onClick={addHours}>
-								Add Hours
+							<div className="business-form-error">{errors.phone_number}</div>
+							{/* ------------------------web----------------------------------------------------------------------------- */}
+							<label className="business-form-label">Web Address</label>
+							<input
+								className="business-input-field"
+								type="text"
+								name="web_address"
+								value={business_web_page}
+								placeholder="https://www.companyaddress.com"
+								onChange={(e) => setBusinessWebPage(e.target.value)}
+							/>
+							<div className="business-form-error">{errors.web}</div>
+							{/* -----------------------business_type------------------------------------------------------------------------------ */}
+							<label className="business-form-label">Categories</label>
+							<input
+								type="text"
+								className="business-input-field"
+								name="business_type"
+								value={business_type}
+								placeholder="Hot Pot, Barbeque, Italian, ..."
+								onChange={(e) => setBusinessType(e.target.value)}
+							/>
+							<div className="business-form-error">{errors.business_type}</div>
+							{/* ------------------------------operation_hours----------------------------------------------------------------------- */}
+							<label className="business-form-label">
+								Hours (dont add hours for closed days.)
+							</label>
+							<div className="business-form-error">{hourError}</div>
+							<div className="display-hours-container">
+								{displayHours.map((each, i) => (
+									<div className="display-single-hour">
+										<div>{each[0]}</div>
+										<div>{each[1]}</div>
+										<div
+											className="remove-display-hour"
+											onClick={() => removeHour(i)}
+										>
+											remove
+										</div>
+									</div>
+								))}
+							</div>
+							<div className="add-hours-wrapper">
+								<select
+									type="text"
+									name="day"
+									value={day}
+									onChange={(e) => setDay(e.target.value)}
+								>
+									{' '}
+									{days.map((day) => (
+										<option value={day}>{day}</option>
+									))}
+								</select>
+								<input
+									className="business-input-field-hour"
+									type="time"
+									value={openHour}
+									name="openHour"
+									onChange={(e) => setOpenHour(e.target.value)}
+								/>
+								<input
+									className="business-input-field-hour"
+									type="time"
+									value={closeHour}
+									name="closeHour"
+									onChange={(e) => setCloseHour(e.target.value)}
+								/>
+								<button type="add-hour" onClick={addHours}>
+									Add Hours
+								</button>
+							</div>
+							<div className="business-form-error">
+								{errors.operation_hours}
+							</div>
+							{/* ---------------------------------price-------------------------------------------------------------------- */}
+							<label className="business-form-label">
+								How much does each customer typically spend at your
+								establishment.
+							</label>
+							<input
+								className="business-input-field"
+								type="number"
+								min={1}
+								name="price"
+								placeholder="$24"
+								onChange={(e) => setPrice(e.target.value)}
+							/>
+							<div className="business-form-error">{errors.price}</div>
+							{/* ---------------------------------description-------------------------------------------------------------------- */}
+							<label className="business-form-label">
+								Please Provide some details about your business
+							</label>
+							<textarea
+								name="description"
+								onChange={(e) => setDescription(e.target.value)}
+								className="business-form-textarea"
+							/>
+							<div className="business-form-error">{errors.description}</div>
+							<button type="submit" className="submit-business-form">
+								Next
 							</button>
-						</div>
-						<div className="business-form-error">{errors.operation_hours}</div>
-						{/* ---------------------------------price-------------------------------------------------------------------- */}
-						<label className="business-form-label">
-							How much does each customer typically spend at your establishment.
-						</label>
-						<input
-							className="business-input-field"
-							type="number"
-							min={1}
-							name="price"
-							placeholder="$24"
-							onChange={(e) => setPrice(e.target.value)}
-						/>
-						<div className="business-form-error">{errors.price}</div>
-						{/* ---------------------------------description-------------------------------------------------------------------- */}
-						<label className="business-form-label">
-							Please Provide some details about your business
-						</label>
-						<textarea
-							name="description"
-							onChange={(e) => setDescription(e.target.value)}
-							className="business-form-textarea"
-						/>
-						<div className="business-form-error">{errors.description}</div>
-						<button type="submit" className="submit-business-form">
-							Next
-						</button>
-					</form>
+						</form>
+					)}
+					{showImagesForm && <AddBusinessImages businessId={businessId} />}
 				</div>
 				<div className="business-form-right-col"></div>
 			</div>

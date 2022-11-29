@@ -18,3 +18,4 @@ class BusinessForm(FlaskForm):
     business_type = StringField('business_type', validators=[DataRequired('what do you specialize in? (Japanese cuisine, Italian...).')])
     operation_hours = StringField('operation_hours', validators=[DataRequired('Let everyone know about your business hours.')])
     price = IntegerField('price', validators=[DataRequired('Please enter a price.')])
+    business_web_page = StringField('business_web_page')

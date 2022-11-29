@@ -1,6 +1,6 @@
 .business-form-container{
     margin-top: 84px;
-    border: 1px solid red;
+    padding: 1rem;
 }
 .business-form{
     display: flex;
@@ -48,4 +48,41 @@
     border-radius: 10px;
     width: 100px;
     align-self: flex-end;
+    cursor: pointer;
+}
+/* Business Images form */
+.complete{
+    height: 60px;
+    width: 150px;
+}
+.later{
+    background-color: gray;
+}
+.business-images-form{
+    flex-direction: column;
+}
+
+.business-two-button{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.business-preview-image{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-top: 1px solid gray;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.business-images-input-field{
+    width: 500px;
+    height: 35px;
+}
+.add-business-single-image{
+    height: 300px;
+    width: 435px;
+    object-fit: cover;
+    border-radius: 10px;
 }

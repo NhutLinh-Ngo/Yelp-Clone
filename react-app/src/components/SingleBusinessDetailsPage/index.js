@@ -51,7 +51,7 @@ const SingleBusinessDetailsPage = () => {
 			const todayHours = operationHoursEachDay // ['Thu', '11:30', '21:30']
 				.filter((day) => day.slice(0, 3) == todayDay)[0]
 				.split('-');
-			if (todayHours[1] !== 'closed') {
+			if (todayHours[1] !== 'Closed') {
 				const openHour = todayHours[1].split(':'); //  ['11', '30']
 				const closeHour = todayHours[2].split(':'); // ['21', '30']
 				const openNow =

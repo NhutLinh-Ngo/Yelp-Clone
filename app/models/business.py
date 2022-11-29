@@ -89,7 +89,9 @@ class Business(db.Model):
         }
 
     def avg_rating(self):
-        return round(sum([review.stars for review in self.business_reviews]) / len(self.business_reviews),2)
+        if self.business_reviews:
+            return round(sum([review.stars for review in self.business_reviews]) / len(self.business_reviews),2)
+        return 0
 
 
     def get_images(self):

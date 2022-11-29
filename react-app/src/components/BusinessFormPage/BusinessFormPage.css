@@ -1,3 +1,7 @@
+.business-form-container{
+    margin-top: 84px;
+    border: 1px solid red;
+}
 .business-form{
     display: flex;
     flex-direction: column;
@@ -8,6 +12,7 @@
 
 .business-form-label{
     font-size: 0.9rem;
+    font-weight: 600;
 }
 .add-hours-wrapper{
     display: flex;
@@ -15,6 +20,7 @@
 }
 .business-input-field-hour{
     width: 80px;
+    height: 30px;
 }
 
 .business-form-textarea{
@@ -22,4 +28,24 @@
     resize: none;
     box-sizing: border-box;
     height: 150px;
+}
+
+.business-form-error{
+    height: 20px;
+    color: red;
+    font-size: 0.8rem;
+}
+
+.business-input-field{
+    height: 30px;
+}
+
+.submit-business-form{
+    background-color: #D32323;
+    border: none;
+    color: white;
+    height: 40px;
+    border-radius: 10px;
+    width: 100px;
+    align-self: flex-end;
 }

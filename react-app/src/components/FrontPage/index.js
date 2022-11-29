@@ -12,8 +12,8 @@ const FrontPage = () => {
 
 	useEffect(() => {
 		const get = async () => {
-			const data = await dispatch(getAllBusiness());
-
+			let data = await dispatch(getAllBusiness());
+			data = data.filter((business) => business.images.length > 0);
 			// generate 3 random business to display on front page
 			let shuffled = data.sort(function () {
 				return 0.5 - Math.random();

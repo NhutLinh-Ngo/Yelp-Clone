@@ -38,6 +38,26 @@ export const getSingleBusiness = (businessId) => async (dispatch) => {
 	}
 };
 
+export const createNewBusiness = (businessData) => async (dispatch) => {
+	const response = await fetch(`/api/business`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(businessData)
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data;
+		}
+	}
+};
+
 const initialState = { allBusinesses: {}, singleBusiness: {} };
 export default function businessReducer(state = initialState, action) {
 	const newState = { ...state };

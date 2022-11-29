@@ -32,23 +32,24 @@ def create_new_business():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_business = Business(
-            owner_id = form['owner_id'],
-            address = form['address'],
-            city = form['city'],
-            state = form['state'],
-            country = form['country'],
-            zip = form['zip'],
-            name = form['name'],
-            description = form['description'],
-            price = form['price'],
-            phone_number = form['phone_number'],
-            business_type = form['business_type'],
-            operation_hours = form['operation_hours']
+            owner_id = form.data['owner_id'],
+            address = form.data['address'],
+            city = form.data['city'],
+            state = form.data['state'],
+            country = form.data['country'],
+            zip = form.data['zip'],
+            name = form.data['name'],
+            description = form.data['description'],
+            price = form.data['price'],
+            phone_number = form.data['phone_number'],
+            business_type = form.data['business_type'],
+            operation_hours = form.data['operation_hours']
         )
 
         db.session.add(new_business)
         db.session.commit()
         return new_business.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 

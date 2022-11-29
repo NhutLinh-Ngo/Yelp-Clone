@@ -118,3 +118,20 @@ color: #999999;
     flex: 1 0 20px;
     color: #eeeeef;
 }
+
+
+.display-hours-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.1rem;
+}
+.display-single-hour{
+    display: flex;
+    font-size: 14px;
+    column-gap: 1rem;
+}
+
+.remove-display-hour{
+    cursor: pointer;
+    color: #0073BB;
+}

@@ -51,19 +51,24 @@ const SingleBusinessDetailsPage = () => {
 			const todayHours = operationHoursEachDay // ['Thu', '11:30', '21:30']
 				.filter((day) => day.slice(0, 3) == todayDay)[0]
 				.split('-');
-			const openHour = todayHours[1].split(':'); //  ['11', '30']
-			const closeHour = todayHours[2].split(':'); // ['21', '30']
-			const openNow =
-				Number(openHour[0]) <= currentHour &&
-				Number(closeHour[0]) >= currentHour;
+			if (todayHours[1] !== 'closed') {
+				const openHour = todayHours[1].split(':'); //  ['11', '30']
+				const closeHour = todayHours[2].split(':'); // ['21', '30']
+				const openNow =
+					Number(openHour[0]) <= currentHour &&
+					Number(closeHour[0]) >= currentHour;
 
-			openHour[1] =
-				Number(openHour[0]) > 11 ? openHour[1] + ' PM' : openHour[1] + ' AM';
-			closeHour[1] =
-				Number(closeHour[0]) > 11 ? closeHour[1] + ' PM' : closeHour[1] + ' AM';
-			openHour[0] = ((Number(openHour[0]) + 11) % 12) + 1;
-			closeHour[0] = ((Number(closeHour[0]) + 11) % 12) + 1;
-			setOperatingHours([openNow, openHour.join(':'), closeHour.join(':')]);
+				openHour[1] =
+					Number(openHour[0]) > 11 ? openHour[1] + ' PM' : openHour[1] + ' AM';
+				closeHour[1] =
+					Number(closeHour[0]) > 11
+						? closeHour[1] + ' PM'
+						: closeHour[1] + ' AM';
+				openHour[0] = ((Number(openHour[0]) + 11) % 12) + 1;
+				closeHour[0] = ((Number(closeHour[0]) + 11) % 12) + 1;
+				setOperatingHours([openNow, openHour.join(':'), closeHour.join(':')]);
+			}
+			console.log(todayHours);
 		};
 		get();
 		return () => {
@@ -116,7 +121,8 @@ const SingleBusinessDetailsPage = () => {
 						{operatingHours[0] ? 'Open' : 'Closed'},
 					</div>
 					<div className="business-operating-hours">
-						{operatingHours[1]} - {operatingHours[2]}
+						{operatingHours[1]}{' '}
+						{operatingHours[2] ? '- ' + operatingHours[2] : ''}
 					</div>
 				</div>
 			</div>

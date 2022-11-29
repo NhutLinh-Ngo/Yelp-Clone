@@ -70,7 +70,28 @@ def update_business(id):
     Allow the owner to update their business if needed, validations: must be the owner
     if the business, and must be logged in
     """
-    pass
+    single_business = Business.query.get(id)
+    form = BusinessForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print('LOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkkLOokkkkkkkkkk',form.data['address'])
+    if single_business:
+        if form.validate_on_submit():
+            single_business.address = form.data['address']
+            single_business.city = form.data['city']
+            single_business.state = form.data['state']
+            single_business.country = form.data['country']
+            single_business.zip = form.data['zip']
+            single_business.name = form.data['name']
+            single_business.description = form.data['description']
+            single_business.price = form.data['price']
+            single_business.phone_number = form.data['phone_number']
+            single_business.business_type = form.data['business_type']
+            single_business.operation_hours = form.data['operation_hours']
+            single_business.business_web_page = form.data['business_web_page']
+            db.session.commit()
+            return single_business.to_dict()
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    # return {'errors': 'business does not exsits'}, 404
 
 @business_routes.route('/<int:id>/reviews')
 def get_reviews_on_business(id):

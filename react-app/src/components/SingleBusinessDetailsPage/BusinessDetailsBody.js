@@ -4,6 +4,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import BusinessReviews from './BusinessReviews';
 
 const BusinessDetailsBody = ({ business, operatingHours }) => {
+	const user = useSelector((state) => state.session.user);
 	const { businessId } = useParams();
 	let operating = business.operation_hours.split(',');
 	operating = operating.map((eachDay) => {
@@ -24,17 +25,32 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 	});
 	const date = new Date();
 	const todayDay = date.toString().split(' ')[0]; // Mon, Tue, Wed....
+
+	const theOwner = user.id == business.owner_id;
+
 	return (
 		<div className="business-details-body-wrapper">
 			<div className="business-details-container">
-				<div className="create-reviews-wrapper">
-					<NavLink
-						to={`/${businessId}/new-review`}
-						className="create-new-review-link"
-					>
-						<i class="fa-regular fa-star" /> Write a review
-					</NavLink>
-				</div>
+				{!theOwner && (
+					<div className="create-reviews-wrapper">
+						<NavLink
+							to={`/${businessId}/new-review`}
+							className="create-new-review-link"
+						>
+							<i class="fa-regular fa-star" /> Write a review
+						</NavLink>
+					</div>
+				)}
+				{theOwner && (
+					<div className="create-reviews-wrapper">
+						<NavLink
+							to={`/${businessId}/edit`}
+							className="create-new-review-link"
+						>
+							<i class="fa-regular fa-star" /> Edit Business
+						</NavLink>
+					</div>
+				)}
 				<div className="business-details-block">
 					<h1>Hours</h1>
 					<div id="operation-hours-container">

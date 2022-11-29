@@ -1,0 +1,9 @@
+.business-form-title{
+    color: #D32323;
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+}
+.business-form-container{
+    display: flex;
+    justify-content: center;
+}

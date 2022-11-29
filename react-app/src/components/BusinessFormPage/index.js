@@ -73,7 +73,7 @@ const BusinessFormPage = () => {
 		setOperationHours(OpHours);
 		let operating = OpHours.map((eachDay) => {
 			eachDay = eachDay.split('-');
-			if (eachDay[1] !== 'closed') {
+			if (eachDay[1] !== 'Closed') {
 				const openHour = eachDay[1].split(':'); //  ['11', '30']
 				const closeHour = eachDay[2].split(':'); // ['21', '30']
 				openHour[1] =
@@ -147,6 +147,9 @@ const BusinessFormPage = () => {
 				<div className="business-form-left-col">
 					{!showImagesForm && (
 						<form className="business-form" onSubmit={handleBusinessFormSubmit}>
+							<div className="business-form-title">
+								Provide Business details.
+							</div>
 							{/* ---------------------name------------------------------------------------------------------------------ */}
 							<label className="business-form-label">Business Name</label>
 							<input

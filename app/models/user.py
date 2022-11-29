@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
         #user's reviews
     user_reviews = db.relationship("Review", back_populates="user")
         # user's businesses
-    user_businesses = db.relationship("Business", back_populates="owner")
+    user_businesses = db.relationship("Business", back_populates="owner", cascade='all, delete')
 
     @property
     def password(self):

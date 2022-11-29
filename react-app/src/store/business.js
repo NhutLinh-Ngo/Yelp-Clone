@@ -58,6 +58,26 @@ export const createNewBusiness = (businessData) => async (dispatch) => {
 	}
 };
 
+export const editBusiness = (businessData, businessId) => async () => {
+	const response = await fetch(`/api/business/${businessId}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(businessData)
+	});
+	console.log('ressssssponmse', response);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data;
+		}
+	}
+};
+
 export const AddBusinessImage = (imagedata, businessId) => async () => {
 	const response = await fetch(`/api/business/${businessId}/images`, {
 		method: 'POST',

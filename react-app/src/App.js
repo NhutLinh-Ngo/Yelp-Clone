@@ -9,7 +9,7 @@ import { authenticate } from './store/session';
 import SingleBusinessDetailsPage from './components/SingleBusinessDetailsPage';
 import ReviewFormPage from './components/ReviewFormPage';
 import BusinessFormPage from './components/BusinessFormPage';
-import AddBusinessImages from './components/BusinessFormPage/AddBusinessImages';
+import EditBusinessFormPage from './components/EditBusinessForm';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -48,6 +48,9 @@ function App() {
 				</Route>
 				<Route path="/:businessId/new-review">
 					<ReviewFormPage />
+				</Route>
+				<Route path="/:businessId/edit">
+					<EditBusinessFormPage />
 				</Route>
 			</Switch>
 		</BrowserRouter>

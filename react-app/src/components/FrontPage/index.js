@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { getAllBusiness } from '../../store/business';
 import FrontPageReviews from '../FrontPageReviews';
 import './FrontPage.css';
@@ -23,7 +23,8 @@ const FrontPage = () => {
 		get();
 	}, []);
 
-	if (!Object.values(allBusinesses).length) return null;
+	if (!Object.values(allBusinesses).length)
+		return <div className="white-blank-page"></div>;
 	return (
 		<div className="front-page-wrapper">
 			<div className="front-page-images-wrapper">

@@ -74,10 +74,11 @@ const SingleBusinessDetailsPage = () => {
 		return () => {
 			dispatch(singleBusinessCleanUp());
 		};
-	}, []);
+	}, [businessId]);
 	let rating = business.avgRating;
 	const color = getColorForRating(rating);
-	if (!Object.values(business).length) return null;
+	if (!Object.values(business).length)
+		return <div className="white-blank-page"> </div>;
 	return (
 		<div className="business-details-page-wrapper center">
 			<div className="business-details-images-container">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../store/session';
+import SearchBar from './SearchBar';
 import './TopNav.css';
 
 const TopNav = ({ black }) => {
@@ -41,6 +42,7 @@ const TopNav = ({ black }) => {
 					FLUM
 				</NavLink>
 			</div>
+			<SearchBar />
 			<div className="top-nav-navlink-wrapper">
 				<NavLink
 					to={`/${user ? 'new-business' : 'login'}`}

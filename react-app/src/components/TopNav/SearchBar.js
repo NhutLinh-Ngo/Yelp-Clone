@@ -102,7 +102,7 @@ const SearchBar = () => {
 					<div className="search-bar search-bar-location">
 						<input
 							id="type-search"
-							placeholder="address, neighborhood, city, state or zip"
+							placeholder="address, city, state or zip (WILL BE IMPLEMENTED LATER)"
 							className="search-bar-input"
 						/>
 					</div>

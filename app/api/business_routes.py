@@ -132,8 +132,8 @@ def create_new_review_for_business(id):
     if business:
         if form.validate_on_submit():
             new_review = Review(
-                Business_id = form.data['Business_id'],
-                user_id = form.data['user_id'],
+                Business_id = business.id,
+                user_id = current_user.id,
                 review = form.data['review'],
                 stars = form.data['stars']
             )

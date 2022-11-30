@@ -51,7 +51,7 @@ const TopNav = ({ black }) => {
 					For businesses
 				</NavLink>
 				<NavLink
-					to="/login"
+					to="/writeareview"
 					className={`nav-link nav-link-redirect ${black ? 'black-color' : ''}`}
 				>
 					write a review

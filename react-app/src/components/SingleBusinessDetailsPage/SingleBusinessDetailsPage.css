@@ -4,13 +4,15 @@
     margin-top: 350px;
     flex-direction: column;
     overflow: hidden;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    /* border: 3px solid orange; */
 }
 
 /* Business header CSS*/
 .business-details-images-container{
     height: 450px;
-    width: 1940px;
+    width: 80vw;
+    min-width: 800px;
     display: flex;
     overflow: hidden;
     position: absolute;
@@ -19,11 +21,22 @@
 }
 .business-detail-faded-background{
     height: 450px;
-    width: 1940px;
+    width: 80vw;
+    min-width: 800px;
     position: absolute;
-    top: 83.88px;
-    background: linear-gradient(0deg, rgba(39, 38, 42, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    /* top: 93.88px; */
+    background: linear-gradient(0deg, rgba(39, 38, 42, 1) 0%, rgba(255, 255, 255, 0) 70%);
 }
+
+ @media (max-width: 2000px) {
+    .business-detail-faded-background {
+        width: 100%;
+    }
+
+    .business-details-images-container {
+        width: 100%;
+    }
+ }
 .business-details-images-container > img{
     object-fit: cover;
     flex-grow: 1;
@@ -32,7 +45,8 @@
 }
 .business-details-header-wrapper{
     /* border: 3px solid orange; */
-    width: 1200px;
+    width: 60vw;
+    min-width: 700px;
     color: white;
     font-weight: bold;
     display: flex;
@@ -44,6 +58,7 @@
 .business-details-name{
     font-size: 3rem;
     margin: 0;
+    min-width: fit-content;
 }
 
 .business-details-price-categories{
@@ -102,10 +117,9 @@
 /* Business details CSS */
 .business-details-body-wrapper{
     /* border: 3px solid red; */
-    width: 1200px;
+    width: 60vw;
+    min-width: 700px;
 }
-
-
 
 .business-details-block{
     display: flex;

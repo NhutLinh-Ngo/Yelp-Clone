@@ -12,6 +12,7 @@ import BusinessFormPage from './components/BusinessFormPage';
 import EditBusinessFormPage from './components/EditBusinessForm';
 import ReviewEditForm from './components/ReviewEditForm';
 import CreditBar from './components/CreditPage';
+import WriteAReview from './components/WriteAReview';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -40,6 +41,9 @@ function App() {
 				<Route path="/" exact={true}>
 					<TopNav />
 					<FrontPage />
+				</Route>
+				<Route path="/writeareview">
+					<WriteAReview />
 				</Route>
 				<Route path="/new-business">
 					<BusinessFormPage />

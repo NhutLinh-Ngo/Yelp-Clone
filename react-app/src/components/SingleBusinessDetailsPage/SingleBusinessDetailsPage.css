@@ -5,7 +5,6 @@
     flex-direction: column;
     overflow: hidden;
     /* min-height: 100vh; */
-    /* border: 3px solid orange; */
 }
 
 /* Business header CSS*/
@@ -54,6 +53,7 @@
     row-gap: 0.8rem;
     padding-bottom: 25px;
 }
+
 
 .business-details-name{
     font-size: 3rem;
@@ -119,6 +119,12 @@
     /* border: 3px solid red; */
     width: 60vw;
     min-width: 700px;
+    display: flex;
+}
+
+.business-details-container {
+    /* border: 1px solid red; */
+    width: 80%;
 }
 
 .business-details-block{
@@ -199,8 +205,12 @@
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
+    transition: all .3s ease-in-out;
 }
 
+.card-review-single-image:hover{
+    transform: scale(2);
+}
 .user-review-icon{
     font-size: 50px;
 }
@@ -241,4 +251,36 @@
 
 .edit-review-link:hover {
     color: #04C858;
+}
+
+
+/* Right side box */
+
+.additional-details-box{
+    border: 1px solid #ebebeb;
+    padding: 1rem;
+    border-radius: 3px;
+    position: sticky;
+    top: 10px;
+}
+
+.business-details-right-Col{
+    min-width: 320px;
+    margin-left: 20px;
+
+}
+
+.business-right-details{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ebebeb;
+    column-gap: 1rem;
+}
+.business-right-details > i {
+    font-size: 25px;
+}
+.no-border{
+    border: none;
 }

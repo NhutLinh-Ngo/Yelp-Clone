@@ -150,8 +150,11 @@ const BusinessFormPage = () => {
 							<div className="business-form-title">
 								Provide Business details.
 							</div>
+							<div style={{ color: 'red', marginBottom: '10px' }}>
+								* fields are required.
+							</div>
 							{/* ---------------------name------------------------------------------------------------------------------ */}
-							<label className="business-form-label">Business Name</label>
+							<label className="business-form-label">Business Name*</label>
 							<input
 								className="business-input-field"
 								type="text"
@@ -162,7 +165,7 @@ const BusinessFormPage = () => {
 							/>
 							<div className="business-form-error">{errors.name}</div>
 							{/* ---------------------address------------------------------------------------------------------------------ */}
-							<label className="business-form-label">Address</label>
+							<label className="business-form-label">Address*</label>
 							<input
 								className="business-input-field"
 								type="text"
@@ -173,7 +176,7 @@ const BusinessFormPage = () => {
 							/>
 							<div className="business-form-error">{errors.address}</div>
 							{/* ----------------------city------------------------------------------------------------------------------- */}
-							<label className="business-form-label">City</label>
+							<label className="business-form-label">City*</label>
 							<input
 								className="business-input-field"
 								type="text"
@@ -184,7 +187,7 @@ const BusinessFormPage = () => {
 							/>
 							<div className="business-form-error">{errors.city}</div>
 							{/* ----------------------state------------------------------------------------------------------------------- */}
-							<label className="business-form-label">State</label>
+							<label className="business-form-label">State*</label>
 							<select
 								className="business-input-field"
 								type="text"
@@ -198,7 +201,7 @@ const BusinessFormPage = () => {
 							</select>
 							<div className="business-form-error">{errors.state}</div>
 							{/* -------------------------zip---------------------------------------------------------------------------- */}
-							<label className="business-form-label">Zip</label>
+							<label className="business-form-label">Zip*</label>
 							<input
 								className="business-input-field"
 								type="text"
@@ -209,7 +212,7 @@ const BusinessFormPage = () => {
 							/>
 							<div className="business-form-error">{errors.zip}</div>
 							{/* ----------------------------phone_number------------------------------------------------------------------------- */}
-							<label className="business-form-label">Phone</label>
+							<label className="business-form-label">Phone*</label>
 							<input
 								className="business-input-field"
 								type="text"
@@ -233,7 +236,7 @@ const BusinessFormPage = () => {
 							/>
 							<div className="business-form-error">{errors.web}</div>
 							{/* -----------------------business_type------------------------------------------------------------------------------ */}
-							<label className="business-form-label">Categories</label>
+							<label className="business-form-label">Categories*</label>
 							<input
 								type="text"
 								className="business-input-field"
@@ -245,7 +248,7 @@ const BusinessFormPage = () => {
 							<div className="business-form-error">{errors.business_type}</div>
 							{/* ------------------------------operation_hours----------------------------------------------------------------------- */}
 							<label className="business-form-label">
-								Hours (dont add hours for closed days.)
+								Hours (dont add hours for closed days.)*
 							</label>
 							<div className="business-form-error">{hourError}</div>
 							<div className="display-hours-container">
@@ -298,7 +301,7 @@ const BusinessFormPage = () => {
 							{/* ---------------------------------price-------------------------------------------------------------------- */}
 							<label className="business-form-label">
 								How much does each customer typically spend at your
-								establishment.
+								establishment.*
 							</label>
 							<input
 								className="business-input-field"
@@ -311,7 +314,7 @@ const BusinessFormPage = () => {
 							<div className="business-form-error">{errors.price}</div>
 							{/* ---------------------------------description-------------------------------------------------------------------- */}
 							<label className="business-form-label">
-								Please Provide some details about your business
+								Please Provide some details about your business*
 							</label>
 							<textarea
 								name="description"

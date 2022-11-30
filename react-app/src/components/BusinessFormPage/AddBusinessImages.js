@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AddBusinessImage, getSingleBusiness } from '../../store/business';
+
 const imageFormat = ['.jpg', '.jpeg', '.png'];
 const isValidUrl = (urlString) => {
 	var inputElement = document.createElement('input');

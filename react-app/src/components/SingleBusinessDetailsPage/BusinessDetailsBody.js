@@ -107,6 +107,29 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 					<BusinessReviews />
 				</div>
 			</div>
+			<div className="business-details-right-Col">
+				<div className="additional-details-box">
+					{business.business_web_page && (
+						<div className="business-right-details">
+							<a href={business.business_web_page} style={{ color: '#49B1CB' }}>
+								{business.business_web_page}
+							</a>
+							<i class="fa-solid fa-arrow-up-right-from-square"></i>
+						</div>
+					)}
+					<div className="business-right-details">
+						{business.phone_number}
+						<i class="fa-solid fa-phone-volume"></i>
+					</div>
+					<div className="business-right-details no-border">
+						<div>
+							{business.address} {business.city}, {business.state}{' '}
+							{business.zip}
+						</div>
+						<i class="fa-solid fa-location-dot"></i>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

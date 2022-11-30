@@ -26,7 +26,7 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 	const date = new Date();
 	const todayDay = date.toString().split(' ')[0]; // Mon, Tue, Wed....
 
-	const theOwner = user.id == business.owner_id;
+	const theOwner = user?.id == business.owner_id;
 
 	return (
 		<div className="business-details-body-wrapper">

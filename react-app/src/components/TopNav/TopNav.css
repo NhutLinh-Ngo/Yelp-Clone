@@ -68,3 +68,11 @@
     right: 30px;
     text-decoration: none;
 }
+
+.logo{
+    background-color: red;
+    height: 40px;
+    /* filter: invert(100%);
+    -webkit-filter: invert(100%); */
+
+}

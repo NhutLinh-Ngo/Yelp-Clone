@@ -52,8 +52,8 @@ const SignUpForm = () => {
 	return (
 		<div className="login-page-wrapper center">
 			<div className="top-red-bar-redirect center">
-				<NavLink className="nav-link" to="/">
-					LOGOs GOES HERE /auth/loginForm
+				<NavLink className="nav-link logo-name" to="/">
+					FLUM
 				</NavLink>
 			</div>
 			{haveErrors && (

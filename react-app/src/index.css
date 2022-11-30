@@ -1,10 +1,13 @@
 /* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap');
 body{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     width: 100%;
-    font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    /* font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif !important; */
+    font-family: 'Open Sans', sans-serif;
     overflow-x: hidden;
 }
 
@@ -26,4 +29,14 @@ body{
 
 h1{
     margin: 0;
+}
+
+.logo-name{
+    font-family: 'Frijole', cursive;
+    color: white;
+    font-size: 30px;
+}
+
+.black{
+    color: black;
 }

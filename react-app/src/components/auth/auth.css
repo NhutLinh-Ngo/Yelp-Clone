@@ -95,10 +95,11 @@ color: #999999;
     left: 0;
     box-sizing: border-box;
     width: 100%;
-    height: 50px;
+    height: 60px;
     background-color: #D32323;
     color: white;
 }
+
 .login-separator {
     /* border: 1px solid blue; */
     display: flex;

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './TopNav.css';
-
+import logo from '../../assets/FLUM_LOGO.webp';
 const TopNav = ({ black }) => {
 	const user = useSelector((state) => state.session.user);
 	const [showMenu, setShowMenu] = useState(false);
@@ -28,8 +28,12 @@ const TopNav = ({ black }) => {
 	return (
 		<div className="top-nav-wrapper">
 			<div className="top-nav-navlink-logo center">
-				<NavLink to="/" exact={true} className="nav-link">
-					Home
+				<NavLink
+					to="/"
+					exact={true}
+					className={`nav-link logo-name ${black ? 'black' : ''}`}
+				>
+					FLUM
 				</NavLink>
 			</div>
 			<div className="top-nav-navlink-wrapper">

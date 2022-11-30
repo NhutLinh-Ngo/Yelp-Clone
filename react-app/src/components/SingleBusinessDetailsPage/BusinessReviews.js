@@ -23,7 +23,7 @@ const BusinessReviews = () => {
 		<div className="business-reviews-wrapper">
 			{reviews.map((review) => {
 				const reviewDate = new Date(review.created_at).toLocaleDateString();
-				const show = review.reviewer.id == user.id;
+				const show = review.reviewer.id == user?.id;
 				return (
 					<div className="business-review-card-container">
 						<div id="card-reviewer-name">

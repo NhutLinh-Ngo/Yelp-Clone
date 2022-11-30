@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from '../auth/LogoutButton';
+import { logout } from '../../store/session';
 import './TopNav.css';
-import logo from '../../assets/FLUM_LOGO.webp';
+
 const TopNav = ({ black }) => {
 	const user = useSelector((state) => state.session.user);
 	const [showMenu, setShowMenu] = useState(false);
+	const dispatch = useDispatch();
+
+	const onLogout = async (e) => {
+		await dispatch(logout());
+	};
 
 	const openMenu = () => {
 		if (showMenu) return;
@@ -72,11 +77,14 @@ const TopNav = ({ black }) => {
 				{user && (
 					<>
 						<div className="user-profile" onClick={openMenu}>
-							<i class="fa-solid fa-circle-user"></i>
+							<i class="fa-solid fa-circle-user users-icon"></i>
 						</div>
 						{showMenu && (
-							<div className="nav-dropped-down center">
-								<LogoutButton />
+							<div className="nav-dropped-down">
+								<div id="logout" onClick={onLogout}>
+									<i class="fa-solid fa-arrow-right-from-bracket" />
+									<div id="logout-div">Logout</div>
+								</div>
 							</div>
 						)}
 					</>

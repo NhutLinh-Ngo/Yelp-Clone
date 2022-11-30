@@ -27,7 +27,9 @@ const BusinessReviews = () => {
 				return (
 					<div className="business-review-card-container">
 						<div id="card-reviewer-name">
-							<i class="fa-regular fa-circle-user"></i>
+							<div className="user-review-icon">
+								<i class="fa-regular fa-circle-user"></i>
+							</div>
 							{review.reviewer.first_name} {review.reviewer.last_name[0]}.
 							{show && (
 								<NavLink

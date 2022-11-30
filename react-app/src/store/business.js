@@ -18,6 +18,17 @@ export const singleBusinessCleanUp = () => ({
 	type: CLEAN_UP_SINGLE_BUSINESS
 });
 
+export const deleteBusiness = (id) => async () => {
+	const response = await fetch(`/api/business/${id}/delete`, {
+		method: 'DELETE'
+	});
+
+	if (response.ok) {
+		return true;
+	}
+	return false;
+};
+
 export const getAllBusiness = () => async (dispatch) => {
 	const response = await fetch('/api/business/all');
 

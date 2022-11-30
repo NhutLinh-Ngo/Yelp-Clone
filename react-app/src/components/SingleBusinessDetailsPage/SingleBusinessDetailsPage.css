@@ -186,7 +186,7 @@
     border-radius: 4px;
 }
 
-.fa-circle-user{
+.user-review-icon{
     font-size: 50px;
 }
 
@@ -196,13 +196,25 @@
     text-decoration: none;
     background-color: red;
     border-radius: 5px;
-
+    border: none;
 }
-
+.create-new-review-link-button{
+    padding: 0.8rem 0;
+    color: white;
+    text-decoration: none;
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    height: 47.09px;
+    width: 178px;
+    font-size: 1rem;
+    cursor: pointer;
+}
 .create-reviews-wrapper{
     height: 100px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 

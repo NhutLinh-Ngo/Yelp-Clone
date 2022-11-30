@@ -31,6 +31,9 @@ h1{
     margin: 0;
 }
 
+button{
+    font-family: 'Open Sans', sans-serif;
+}
 .logo-name{
     font-family: 'Frijole', cursive;
     color: white;

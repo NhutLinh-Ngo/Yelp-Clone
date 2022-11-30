@@ -62,13 +62,14 @@ def get_business_by_id(id):
     single_business = Business.query.get(id)
     return {'business': single_business.to_dict_single()}
 
-@business_routes.route('/<int:id>/delete', methods['DELETE'])
+@business_routes.route('/<int:id>/delete', methods=['DELETE'])
 def DELETE_business_by_id(id):
     """
     DELETE BUSINESS BASED ON ID
     """
     single_business = Business.query.get(id)
     db.session.delete(single_business)
+    db.session.commit()
     return {'message': 'DELETE SUCCESSFUL'}
 
 

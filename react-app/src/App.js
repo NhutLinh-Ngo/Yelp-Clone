@@ -11,6 +11,7 @@ import ReviewFormPage from './components/ReviewFormPage';
 import BusinessFormPage from './components/BusinessFormPage';
 import EditBusinessFormPage from './components/EditBusinessForm';
 import ReviewEditForm from './components/ReviewEditForm';
+import CreditBar from './components/CreditPage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -57,6 +58,7 @@ function App() {
 					<ReviewEditForm />
 				</Route>
 			</Switch>
+			<CreditBar />
 		</BrowserRouter>
 	);
 }

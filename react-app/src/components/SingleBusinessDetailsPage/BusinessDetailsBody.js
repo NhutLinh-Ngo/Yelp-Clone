@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import BusinessReviews from './BusinessReviews';
+import { deleteBusiness } from '../../store/business';
 
 const BusinessDetailsBody = ({ business, operatingHours }) => {
 	const user = useSelector((state) => state.session.user);
+	const dispatch = useDispatch();
+	const history = useHistory();
 	const { businessId } = useParams();
 	let operating = business.operation_hours.split(',');
 	operating = operating.map((eachDay) => {
@@ -26,6 +29,16 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 	const date = new Date();
 	const todayDay = date.toString().split(' ')[0]; // Mon, Tue, Wed....
 
+	const handleDeleteBusiness = async () => {
+		if (
+			window.confirm(
+				'If deleted, all data will be lost on this business, are you sure you want to delete?'
+			)
+		) {
+			const deleted = await dispatch(deleteBusiness(businessId));
+			if (deleted) history.push('/');
+		}
+	};
 	const theOwner = user?.id == business.owner_id;
 
 	return (
@@ -49,6 +62,12 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 						>
 							<i class="fa-regular fa-star" /> Edit Business
 						</NavLink>
+						<button
+							className="create-new-review-link-button"
+							onClick={handleDeleteBusiness}
+						>
+							Delete Business
+						</button>
 					</div>
 				)}
 				<div className="business-details-block">

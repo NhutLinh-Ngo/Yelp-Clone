@@ -61,18 +61,42 @@
     background-color: rgba(0, 0, 0, 0.1)
 }
 .nav-dropped-down{
-    position: fixed;
+    position: absolute;
     height: 100px;
     width: 150px;
-    top: 50px;
-    right: 30px;
+    top: 70px;
+    right: 35px;
     text-decoration: none;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 1rem 0;
+}
+.user-profile{
+    font-size: 34px;
+    cursor: pointer;
 }
 
-.logo{
-    background-color: red;
-    height: 40px;
-    /* filter: invert(100%);
-    -webkit-filter: invert(100%); */
+.users-icon:hover{
+    box-shadow: 0px 0px 5px black;
+}
 
+.users-icon{
+    border-radius: 51%;
+}
+
+
+#logout{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+    height: 30px;
+}
+
+#logout:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#logout-div{
+    padding-left: 0.5rem;
 }

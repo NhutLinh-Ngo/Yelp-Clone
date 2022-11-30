@@ -204,3 +204,14 @@
     display: flex;
     align-items: center;
 }
+
+
+.edit-review-link{
+    font-size: 25px;
+    color: black;
+    margin-left: 20px;
+}
+
+.edit-review-link:hover {
+    color: #04C858;
+}

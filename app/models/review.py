@@ -31,7 +31,8 @@ class Review(db.Model):
             'stars': self.stars,
             'review': self.review,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'reviewImages': self.get_review_images()
         }
 
     def get_reviewer(self):

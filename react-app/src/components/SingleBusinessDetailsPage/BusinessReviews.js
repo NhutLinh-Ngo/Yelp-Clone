@@ -9,6 +9,7 @@ const BusinessReviews = () => {
 	const reviews = useSelector((state) =>
 		Object.values(state.review.businessReviews)
 	);
+	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -22,11 +23,20 @@ const BusinessReviews = () => {
 		<div className="business-reviews-wrapper">
 			{reviews.map((review) => {
 				const reviewDate = new Date(review.created_at).toLocaleDateString();
+				const show = review.reviewer.id == user.id;
 				return (
 					<div className="business-review-card-container">
 						<div id="card-reviewer-name">
 							<i class="fa-regular fa-circle-user"></i>
 							{review.reviewer.first_name} {review.reviewer.last_name[0]}.
+							{show && (
+								<NavLink
+									to={`/${businessId}/reviews/${review.id}/edit`}
+									className="nav-link edit-review-link"
+								>
+									<i class="fa-solid fa-pen-to-square"></i>
+								</NavLink>
+							)}
 						</div>
 						<div id="card-review-stars">
 							<ReviewStarsDisplay rating={review.stars} />{' '}

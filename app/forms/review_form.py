@@ -7,7 +7,5 @@ from app.models import Business
 
 
 class ReviewForm(FlaskForm):
-    Business_id = IntegerField('Business_id', validators=[DataRequired()])
-    user_id = IntegerField('user_id', validators=[DataRequired()])
     review = TextAreaField('review', validators=[DataRequired('To submit your review, please explain your rating to others.')])
     stars = IntegerField('stars', validators=[DataRequired('To submit your review, please select a star rating for this business.'), NumberRange(min=1, max=5, message='Rating must be between 1 and 5.')])

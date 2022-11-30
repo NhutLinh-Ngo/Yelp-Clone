@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
-import { postNewReview, postNewReviewImage } from '../../store/review';
-import { getAllBusiness } from '../../store/business';
+import {
+	getSingleReview,
+	DeleteReviewImage,
+	deleteReview,
+	postNewReviewImage,
+	updateReview
+} from '../../store/review';
+import { getSingleBusiness, singleBusinessCleanUp } from '../../store/business';
 import { FaStar } from 'react-icons/fa';
-import './ReviewFormPage.css';
-import { Modal } from '../../context/Modal';
-import LoginFormModal from '../LoginModalForm';
+import './ReviewEditForm.css';
 
 const starsColor = (rating) => {
 	if (rating < 2) return 'rgb(255, 204, 75)';
@@ -41,22 +45,14 @@ const isValidUrl = (urlString) => {
 	}
 };
 
-const ReviewFormPage = () => {
-	const { businessId } = useParams();
-	let business = useSelector(
-		(state) => state.business.allBusinesses[`${businessId}`]
-	);
+const ReviewEditForm = () => {
+	const { reviewId, businessId } = useParams();
 	const user = useSelector((state) => state.session.user);
-	const businessReviews = useSelector((state) =>
-		Object.values(state.review.businessReviews)
-	);
+	const thisReview = useSelector((state) => state.review.singleReview);
+	const business = useSelector((state) => state.business.singleBusiness);
+
 	const dispatch = useDispatch();
 	const history = useHistory();
-	useEffect(() => {
-		if (!business) {
-			business = dispatch(getAllBusiness());
-		}
-	}, []);
 
 	const [stars, setStars] = useState(0);
 	const [hover, setHover] = useState(null);
@@ -65,66 +61,70 @@ const ReviewFormPage = () => {
 	const [urls, setUrls] = useState('');
 	const [reviewImages, setReviewImages] = useState([]);
 	const [imageError, setImageError] = useState('');
-	const [showLoginModal, setShowLoginModal] = useState(false);
+
+	useEffect(() => {
+		const getReivew = async () => {
+			await dispatch(getSingleBusiness(businessId));
+			const review = await dispatch(getSingleReview(reviewId));
+			console.log(review);
+			setReview(review.review);
+			setStars(review.stars);
+			setReviewImages(review.reviewImages);
+		};
+
+		getReivew();
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const reviewdata = {
+			stars,
+			review
+		};
 
-		if (!user) {
-			setShowLoginModal(true);
-		}
-
-		if (user) {
-			const alreadyHaveReview = businessReviews.filter(
-				(review) => review.reviewer.id == user.id
-			);
-			if (alreadyHaveReview.length > 0) {
-				window.alert(
-					'You already have a review for this business. Please consider editing your original review instead.'
-				);
-				return history.push(`/${businessId}`);
-			}
-			const reviewdata = {
-				Business_id: Number(businessId),
-				user_id: user.id,
-				stars,
-				review
-			};
-			// post review
-			const newReview = await dispatch(postNewReview(reviewdata));
-			if (newReview.errors) {
-				setReviewErrors(newReview.errors);
-			} else {
-				/// post images for review
-				reviewImages.forEach(async (url) => {
-					const imageData = {
-						review_id: newReview.id,
-						url
-					};
-					await dispatch(postNewReviewImage(imageData));
-				});
-
-				history.push(`/${businessId}`);
-			}
+		const editedReivew = await dispatch(updateReview(reviewdata, reviewId));
+		if (editedReivew.errors) {
+			setReviewErrors(editedReivew.errors);
+		} else {
+			history.push(`/${businessId}`);
 		}
 	};
 
-	const handleAddPhoto = (e) => {
+	const HandleDeleteReview = async (e) => {
+		e.preventDefault();
+
+		const deleted = await dispatch(deleteReview(reviewId));
+
+		if (deleted) history.push(`/${businessId}`);
+	};
+	const handleAddPhoto = async (e) => {
 		e.preventDefault();
 
 		const checkUrl = isValidUrl(urls);
 		if (checkUrl == true) {
+			const image = {
+				review_id: Number(reviewId),
+				url: urls
+			};
+
+			const newImage = await dispatch(postNewReviewImage(image));
 			let images = reviewImages;
-			images.push(urls);
+			images.push(newImage);
+			console.log(images);
 			setReviewImages(images);
 			setUrls('');
 			setImageError('');
 		} else {
-			console.log(checkUrl);
 			setImageError(checkUrl);
 		}
 	};
-	if (!business) return null;
+
+	const handleRemovePhoto = async (id) => {
+		let images = reviewImages;
+		images = images.filter((image) => image.id !== id);
+		const deletePhoto = await dispatch(DeleteReviewImage(id));
+		if (deletePhoto) setReviewImages(images);
+	};
 	return (
 		<>
 			<div className="top-red-bar-redirect center">
@@ -182,7 +182,7 @@ const ReviewFormPage = () => {
 							<div className="review-errors">{reviewErrors.review}</div>
 						</div>
 						<div className="return-to-business-from-review add-photos">
-							Add Photos
+							Add/Remove Photos
 						</div>
 						<div className="review-form-inputs">
 							<div id="review-image-errors">{imageError}</div>
@@ -193,29 +193,47 @@ const ReviewFormPage = () => {
 								onChange={(e) => setUrls(e.target.value)}
 								value={urls}
 							/>
-							<button type="add" className="add-image" onClick={handleAddPhoto}>
+							<button
+								type="add"
+								className="add-image complete-review"
+								onClick={handleAddPhoto}
+							>
 								Add photo
 							</button>
 							<div className="review-preview-image">
-								{reviewImages.map((url) => (
-									<img className="review-single-image" src={url} />
+								{reviewImages.map((image) => (
+									<div className="review-image-wrapper center">
+										<img className="review-single-image" src={image.url} />
+										<div
+											className="delete-review-image"
+											onClick={() => handleRemovePhoto(image.id)}
+										>
+											remove
+										</div>
+									</div>
 								))}
 							</div>
 						</div>
-						<button className="review-submit-button" type="submit">
-							Post Review
-						</button>
+						<div className="button-seperator">
+							<button
+								className="review-submit-button"
+								type="delete"
+								onClick={HandleDeleteReview}
+							>
+								Delete Review
+							</button>
+							<button
+								className="review-submit-button complete-review"
+								type="submit"
+							>
+								Complete
+							</button>
+						</div>
 					</form>
 				</div>
 			</div>
-
-			{showLoginModal && (
-				<Modal onClose={() => setShowLoginModal(false)}>
-					<LoginFormModal setShowLoginModal={setShowLoginModal} />
-				</Modal>
-			)}
 		</>
 	);
 };
 
-export default ReviewFormPage;
+export default ReviewEditForm;

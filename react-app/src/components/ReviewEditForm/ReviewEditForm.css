@@ -1,0 +1,19 @@
+.button-seperator{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.complete-review{
+    background-color: #71cb98;
+}
+
+
+.delete-review-image{
+    cursor: pointer;
+    color: red;
+}
+
+.review-image-wrapper{
+    flex-direction: column;
+}

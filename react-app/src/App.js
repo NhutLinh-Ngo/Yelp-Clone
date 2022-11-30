@@ -10,6 +10,7 @@ import SingleBusinessDetailsPage from './components/SingleBusinessDetailsPage';
 import ReviewFormPage from './components/ReviewFormPage';
 import BusinessFormPage from './components/BusinessFormPage';
 import EditBusinessFormPage from './components/EditBusinessForm';
+import ReviewEditForm from './components/ReviewEditForm';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -51,6 +52,9 @@ function App() {
 				</Route>
 				<Route path="/:businessId/edit">
 					<EditBusinessFormPage />
+				</Route>
+				<Route path="/:businessId/reviews/:reviewId/edit">
+					<ReviewEditForm />
 				</Route>
 			</Switch>
 		</BrowserRouter>

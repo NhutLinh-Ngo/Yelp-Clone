@@ -104,14 +104,18 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 				</div>
 				<div className="business-details-block">
 					<h1>Reviews</h1>
-					<BusinessReviews />
+					<BusinessReviews business={business} />
 				</div>
 			</div>
 			<div className="business-details-right-Col">
 				<div className="additional-details-box">
 					{business.business_web_page && (
 						<div className="business-right-details">
-							<a href={business.business_web_page} style={{ color: '#49B1CB' }}>
+							<a
+								href={business.business_web_page}
+								style={{ color: '#49B1CB' }}
+								target="__blank"
+							>
 								{business.business_web_page}
 							</a>
 							<i class="fa-solid fa-arrow-up-right-from-square"></i>

@@ -284,3 +284,72 @@
 .no-border{
     border: none;
 }
+
+
+
+/* Overall review Bar */
+
+.business-overall-review-bar{
+    display: flex;
+    align-items: center;
+    column-gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.overall-review-stars {
+    min-width: fit-content;
+}
+
+
+.business-over-bar-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+.stars-bar-gray{
+    height: 13px;
+    width: 100%;
+    border-radius: 13px;
+    background: #F0F0F0;
+}
+.stars-bar-color{
+    position: relative;
+    height: 13px;
+    border-radius: 13px;
+    box-sizing: border-box;
+}
+.stars-bar-title{
+    min-width: fit-content;
+    margin-right: 10px;
+}
+
+.onestar-div{
+    margin-right: 17.5px;
+}
+.stars-bar-container{
+    display: flex;
+    align-items: center;
+
+    /* border: 1px solid red; */
+}
+
+.b-oneStar {
+    background: rgb(255, 204, 75)
+}
+
+.b-twoStars {
+    background: rgb(255, 173, 72)
+}
+
+.b-threeStars {
+    background: rgb(255, 135, 66);
+}
+
+.b-fourStars {
+    background: rgb(255, 100, 61);
+}
+
+.b-fiveStars {
+    background: rgb(251, 67, 60);
+}

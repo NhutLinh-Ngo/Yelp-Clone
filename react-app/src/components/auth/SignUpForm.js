@@ -10,6 +10,7 @@ const SignUpForm = () => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [haveErrors, setHaveErrors] = useState(false);
+	const [confirmPassword, setConfirmPassword] = useState('');
 	const user = useSelector((state) => state.session.user);
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -22,7 +23,11 @@ const SignUpForm = () => {
 			email,
 			password
 		};
-
+		if (password !== confirmPassword) {
+			setHaveErrors(true);
+			setErrors({ comfirmPassword: 'Passwords do not match!' });
+			return;
+		}
 		const data = await dispatch(signUp(userData));
 		if (data) {
 			setHaveErrors(true);
@@ -30,6 +35,7 @@ const SignUpForm = () => {
 		}
 	};
 
+	console.log(errors);
 	const loginDemo = async (e) => {
 		await dispatch(login('demo@aa.io', 'password'));
 	};
@@ -42,6 +48,9 @@ const SignUpForm = () => {
 		setPassword(e.target.value);
 	};
 
+	const updateConfirmPassword = (e) => {
+		setConfirmPassword(e.target.value);
+	};
 	const switchToLogin = () => {
 		history.push('/login');
 	};
@@ -61,7 +70,9 @@ const SignUpForm = () => {
 					{Object.values(errors).length > 0 && (
 						<div className="login-form-error">
 							<span className="unable-to-login">
-								{errors['first_name']
+								{errors.comfirmPassword
+									? errors.comfirmPassword
+									: errors['first_name']
 									? errors['first_name']
 									: errors['last_name']
 									? errors['last_name']
@@ -136,6 +147,16 @@ const SignUpForm = () => {
 									onChange={updatePassword}
 									value={password}
 									placeholder="Password"
+									className="input-boxes"
+								></input>
+							</div>
+							<div>
+								<input
+									type="password"
+									name="confirm-password"
+									onChange={updateConfirmPassword}
+									value={confirmPassword}
+									placeholder="Confirm Password"
 									className="input-boxes"
 								></input>
 							</div>

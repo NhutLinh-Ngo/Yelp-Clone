@@ -16,10 +16,10 @@
 }
 .add-hours-wrapper{
     display: flex;
-    column-gap: 1rem;
+    column-gap: 0.4rem;
 }
 .business-input-field-hour{
-    width: 80px;
+    width: 105px;
     height: 30px;
 }
 

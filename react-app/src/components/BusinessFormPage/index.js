@@ -282,6 +282,7 @@ const BusinessFormPage = () => {
 									type="time"
 									value={openHour}
 									name="openHour"
+									pattern="[0-9]{2}:[0-9]{2}"
 									onChange={(e) => setOpenHour(e.target.value)}
 								/>
 								<input
@@ -289,6 +290,9 @@ const BusinessFormPage = () => {
 									type="time"
 									value={closeHour}
 									name="closeHour"
+									pattern="[0-9]{2}:[0-9]{2}"
+									minLength={5}
+									maxLength={5}
 									onChange={(e) => setCloseHour(e.target.value)}
 								/>
 								<button type="add-hour" onClick={addHours}>

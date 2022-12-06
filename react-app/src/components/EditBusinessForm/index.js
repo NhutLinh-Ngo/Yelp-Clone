@@ -75,7 +75,6 @@ const EditBusinessFormPage = () => {
 				setState(business.state);
 
 				let OpHours = business.operation_hours;
-				console.log(OpHours);
 				OpHours = OpHours.split(',');
 				setOperationHours(OpHours);
 				let operating = OpHours.map((eachDay) => {
@@ -131,7 +130,6 @@ const EditBusinessFormPage = () => {
 			}
 			return eachDay;
 		});
-		console.log(OpHours, '-------', operating);
 		setDisplayHours(operating);
 	};
 
@@ -167,12 +165,9 @@ const EditBusinessFormPage = () => {
 			business_web_page
 		};
 
-		console.log(businessData);
-
 		const editedBusiness = await dispatch(
 			editBusiness(businessData, businessId)
 		);
-		console.log(editedBusiness);
 		if (editedBusiness.errors) {
 			setErrors(editedBusiness.errors);
 		} else {

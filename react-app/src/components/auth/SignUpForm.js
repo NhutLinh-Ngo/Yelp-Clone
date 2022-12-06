@@ -35,7 +35,6 @@ const SignUpForm = () => {
 		}
 	};
 
-	console.log(errors);
 	const loginDemo = async (e) => {
 		await dispatch(login('demo@aa.io', 'password'));
 	};

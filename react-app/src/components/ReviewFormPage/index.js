@@ -120,7 +120,6 @@ const ReviewFormPage = () => {
 			setUrls('');
 			setImageError('');
 		} else {
-			console.log(checkUrl);
 			setImageError(checkUrl);
 		}
 	};
@@ -198,7 +197,15 @@ const ReviewFormPage = () => {
 							</button>
 							<div className="review-preview-image">
 								{reviewImages.map((url) => (
-									<img className="review-single-image" src={url} />
+									<img
+										className="review-single-image"
+										src={url}
+										onError={({ currentTarget }) => {
+											currentTarget.onerror = null;
+											currentTarget.src =
+												'https://img.freepik.com/free-vector/red-grunge-style-coming-soon-design_1017-26691.jpg?w=2000';
+										}}
+									/>
 								))}
 							</div>
 						</div>

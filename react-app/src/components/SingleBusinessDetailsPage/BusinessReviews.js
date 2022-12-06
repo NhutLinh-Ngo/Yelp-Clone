@@ -36,7 +36,6 @@ const BusinessReviews = ({ business }) => {
 	if (four !== 0) four = (four / business.totalReviews) * 100;
 	if (five !== 0) five = (five / business.totalReviews) * 100;
 
-	console.log(one, two, three, four, five);
 	if (!reviews.length) return <div>Be the first to review this business!</div>;
 	return (
 		<div className="business-reviews-wrapper">
@@ -132,6 +131,11 @@ const BusinessReviews = ({ business }) => {
 											<img
 												className="card-review-single-image"
 												src={image.url}
+												onError={({ currentTarget }) => {
+													currentTarget.onerror = null;
+													currentTarget.src =
+														'https://img.freepik.com/free-vector/red-grunge-style-coming-soon-design_1017-26691.jpg?w=2000';
+												}}
 											/>
 										);
 									}

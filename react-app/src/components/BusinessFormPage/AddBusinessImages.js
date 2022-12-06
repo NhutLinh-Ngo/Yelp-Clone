@@ -38,7 +38,6 @@ const AddBusinessImages = ({ businessId }) => {
 			setUrls('');
 			setImageError('');
 		} else {
-			console.log(checkUrl);
 			setImageError(checkUrl);
 		}
 	};
@@ -82,7 +81,15 @@ const AddBusinessImages = ({ businessId }) => {
 				</button>
 				<div className="business-preview-image">
 					{reviewImages.map((url) => (
-						<img className="add-business-single-image" src={url} />
+						<img
+							className="add-business-single-image"
+							src={url}
+							onError={({ currentTarget }) => {
+								currentTarget.onerror = null;
+								currentTarget.src =
+									'https://img.freepik.com/free-vector/red-grunge-style-coming-soon-design_1017-26691.jpg?w=2000';
+							}}
+						/>
 					))}
 				</div>
 

@@ -66,7 +66,6 @@ const ReviewEditForm = () => {
 		const getReivew = async () => {
 			await dispatch(getSingleBusiness(businessId));
 			const review = await dispatch(getSingleReview(reviewId));
-			console.log(review);
 			setReview(review.review);
 			setStars(review.stars);
 			setReviewImages(review.reviewImages);
@@ -110,7 +109,6 @@ const ReviewEditForm = () => {
 			const newImage = await dispatch(postNewReviewImage(image));
 			let images = reviewImages;
 			images.push(newImage);
-			console.log(images);
 			setReviewImages(images);
 			setUrls('');
 			setImageError('');
@@ -203,7 +201,15 @@ const ReviewEditForm = () => {
 							<div className="review-preview-image">
 								{reviewImages.map((image) => (
 									<div className="review-image-wrapper center">
-										<img className="review-single-image" src={image.url} />
+										<img
+											className="review-single-image"
+											src={image.url}
+											onError={({ currentTarget }) => {
+												currentTarget.onerror = null;
+												currentTarget.src =
+													'https://img.freepik.com/free-vector/red-grunge-style-coming-soon-design_1017-26691.jpg?w=2000';
+											}}
+										/>
 										<div
 											className="delete-review-image"
 											onClick={() => handleRemovePhoto(image.id)}

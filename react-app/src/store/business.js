@@ -77,7 +77,6 @@ export const editBusiness = (businessData, businessId) => async () => {
 		},
 		body: JSON.stringify(businessData)
 	});
-	console.log('ressssssponmse', response);
 	if (response.ok) {
 		const data = await response.json();
 		return data;

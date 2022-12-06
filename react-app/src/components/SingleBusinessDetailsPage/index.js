@@ -68,7 +68,6 @@ const SingleBusinessDetailsPage = () => {
 				closeHour[0] = ((Number(closeHour[0]) + 11) % 12) + 1;
 				setOperatingHours([openNow, openHour.join(':'), closeHour.join(':')]);
 			}
-			console.log(todayHours);
 		};
 		get();
 		return () => {
@@ -84,7 +83,14 @@ const SingleBusinessDetailsPage = () => {
 			<div className="business-details-images-container">
 				<div className="business-detail-faded-background"></div>
 				{businessImages.map((url) => (
-					<img src={url} />
+					<img
+						src={url}
+						onError={({ currentTarget }) => {
+							currentTarget.onerror = null;
+							currentTarget.src =
+								'https://img.freepik.com/free-vector/red-grunge-style-coming-soon-design_1017-26691.jpg?w=2000';
+						}}
+					/>
 				))}
 			</div>
 			<div className="business-details-header-wrapper">

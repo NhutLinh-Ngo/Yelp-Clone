@@ -35,7 +35,15 @@ const FrontPage = () => {
 					return (
 						<>
 							<div className="front-page-preview-wrapper" key={i}>
-								<img src={previewImage[0].url} className="front-page-images" />
+								<img
+									src={previewImage[0].url}
+									className="front-page-images"
+									onError={({ currentTarget }) => {
+										currentTarget.onerror = null;
+										currentTarget.src =
+											'https://img.freepik.com/free-vector/red-grunge-style-coming-soon-design_1017-26691.jpg?w=2000';
+									}}
+								/>
 								<NavLink
 									to={`/${each.id}`}
 									className="nav-link preview-image-nav-link"

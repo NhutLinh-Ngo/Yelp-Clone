@@ -5,6 +5,7 @@
     flex-direction: column;
     overflow: hidden;
     /* min-height: 100vh; */
+
 }
 
 /* Business header CSS*/
@@ -136,6 +137,25 @@
     border-top: 1px solid #ebebeb;
 }
 
+.business-details-block-map{
+    display: flex;
+    padding: 2rem 0;
+    column-gap: 3rem;
+    border-top: 1px solid #ebebeb;
+    min-width: fit-content;
+    align-items: center;
+}
+@media (max-width: 1530px) {
+    .business-details-block-map{
+        flex-direction: column;
+    }
+ }
+
+
+.hours-wrapper{
+    min-width: fit-content;
+    /* border: 1px solid red; */
+}
 #day-of-week{
     margin-right: 2rem;
 }

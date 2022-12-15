@@ -15,7 +15,9 @@ def seed_businesses():
         price=25,
         phone_number='(626) 623-8800',
         business_type='Hot Pot, Noodles, Taiwanese',
-        operation_hours='Mon-11:30-21:30,Tue-11:30-21:30,Wed-11:30-21:30,Thu-11:30-21:30,Fri-11:30-21:30,Sat-11:30-21:30,Sun-11:30-21:30'
+        operation_hours='Mon-11:30-21:30,Tue-11:30-21:30,Wed-11:30-21:30,Thu-11:30-21:30,Fri-11:30-21:30,Sat-11:30-21:30,Sun-11:30-21:30',
+        lat = 34.13003680148314,
+        lng = -118.05636494935908
     )
 
     Thristy = Business(
@@ -31,7 +33,9 @@ def seed_businesses():
         phone_number='(626) 581-0006',
         business_type='Korean, Barbeque',
         operation_hours='Mon-17:00-21:45,Tue-17:00-21:45,Wed-17:00-21:45,Thu-17:00-21:45,Fri-17:00-22:30,Sat-11:00-22:30,Sun-11:00-21:30',
-        business_web_page='https://www.thirstycowbbq.com'
+        business_web_page='https://www.thirstycowbbq.com',
+        lat = 33.99417329470379,
+        lng = -117.92355928925961
     )
 
     nhaTrang = Business(
@@ -46,7 +50,9 @@ def seed_businesses():
         price=20,
         phone_number='(626) 572-7638',
         business_type='Vietnamese, Chinese',
-        operation_hours='Mon-08:00-21:00,Tue-08:00-21:00,Wed-08:00-21:00,Thu-08:00-21:00,Fri-08:00-21:00,Sat-08:00-21:00,Sun-08:00-21:00'
+        operation_hours='Mon-08:00-21:00,Tue-08:00-21:00,Wed-08:00-21:00,Thu-08:00-21:00,Fri-08:00-21:00,Sat-08:00-21:00,Sun-08:00-21:00',
+        lat = 34.062596594033195,
+        lng = -118.1119484162471
     )
 
     db.session.add(nhaTrang)

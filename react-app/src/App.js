@@ -62,9 +62,6 @@ function App() {
 				<Route path="/:businessId/reviews/:reviewId/edit">
 					<ReviewEditForm />
 				</Route>
-				<Route path="/map/map">
-					<MapPageA />
-				</Route>
 			</Switch>
 			<CreditBar />
 		</BrowserRouter>

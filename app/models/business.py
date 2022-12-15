@@ -55,7 +55,9 @@ class Business(db.Model):
             'updated_at': self.updated_at,
             'images': self.get_images(),
             'owner': self.owner.to_dict_owner(),
-            'avgRating': self.avg_rating()
+            'avgRating': self.avg_rating(),
+            'lat': self.lat,
+            'lng': self.lng
         }
 
     def to_dict_single(self):
@@ -78,7 +80,9 @@ class Business(db.Model):
             'updated_at': self.updated_at,
             'avgRating': self.avg_rating(),
             'allImages': self.get_all_images_on_business(),
-            'totalReviews': self.total_reviews()
+            'totalReviews': self.total_reviews(),
+            'lat': self.lat,
+            'lng': self.lng
         }
 
     def to_dict_cord(self):

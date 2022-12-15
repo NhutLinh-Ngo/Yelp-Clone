@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import BusinessReviews from './BusinessReviews';
 import { deleteBusiness } from '../../store/business';
+import MapPageA from '../GoogleMapSingleBusiness';
 
 const BusinessDetailsBody = ({ business, operatingHours }) => {
 	const user = useSelector((state) => state.session.user);
@@ -70,29 +71,34 @@ const BusinessDetailsBody = ({ business, operatingHours }) => {
 						</button>
 					</div>
 				)}
-				<div className="business-details-block">
-					<h1>Hours</h1>
-					<div id="operation-hours-container">
-						<div id="each-day">
-							{operating.map((day) => (
-								<div id="day-of-week">{day[0]}</div>
-							))}
-						</div>
-						<div id="each-day">
-							{operating.map((day) => (
-								<div id="hours-of-operation">
-									<div>{day[1]}</div>
-									{day[0] == todayDay && (
-										<div
-											className={`business-open-close ${
-												operatingHours[0] ? 'open' : 'close'
-											}`}
-										>
-											{operatingHours[0] ? 'Open now' : 'Closed'}
-										</div>
-									)}
-								</div>
-							))}
+				<div className="business-details-block-map">
+					<div>
+						<MapPageA business={business} />
+					</div>
+					<div className="hours-wrapper">
+						<h1>Hours</h1>
+						<div id="operation-hours-container">
+							<div id="each-day">
+								{operating.map((day) => (
+									<div id="day-of-week">{day[0]}</div>
+								))}
+							</div>
+							<div id="each-day">
+								{operating.map((day) => (
+									<div id="hours-of-operation">
+										<div>{day[1]}</div>
+										{day[0] == todayDay && (
+											<div
+												className={`business-open-close ${
+													operatingHours[0] ? 'open' : 'close'
+												}`}
+											>
+												{operatingHours[0] ? 'Open now' : 'Closed'}
+											</div>
+										)}
+									</div>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>

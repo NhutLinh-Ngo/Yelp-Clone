@@ -13,6 +13,7 @@ import EditBusinessFormPage from './components/EditBusinessForm';
 import ReviewEditForm from './components/ReviewEditForm';
 import CreditBar from './components/CreditPage';
 import WriteAReview from './components/WriteAReview';
+import MapPageA from './components/GoogleMapSingleBusiness';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -60,6 +61,9 @@ function App() {
 				</Route>
 				<Route path="/:businessId/reviews/:reviewId/edit">
 					<ReviewEditForm />
+				</Route>
+				<Route path="/map/map">
+					<MapPageA />
 				</Route>
 			</Switch>
 			<CreditBar />

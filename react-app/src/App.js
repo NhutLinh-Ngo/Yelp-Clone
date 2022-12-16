@@ -14,6 +14,8 @@ import ReviewEditForm from './components/ReviewEditForm';
 import CreditBar from './components/CreditPage';
 import WriteAReview from './components/WriteAReview';
 import MapPageA from './components/GoogleMapSingleBusiness';
+import GoogleMapAllBusiness from './components/GoogleMapMultipleBusinesses';
+import SearchResultPage from './components/SearchResultPage';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -38,6 +40,10 @@ function App() {
 				</Route>
 				<Route path="/signup" exact={true}>
 					<SignUpForm />
+				</Route>
+				<Route path="/search">
+					<TopNav black={true} />
+					<SearchResultPage />
 				</Route>
 				<Route path="/" exact={true}>
 					<TopNav />

@@ -111,7 +111,7 @@ const SingleBusinessDetailsPage = () => {
 						<>
 							•
 							<NavLink
-								to="/"
+								to={`/search/?desc=${category.replace(/^\s+|\s+$/g, '')}&loc=`}
 								className="nav-link business-details-category-link"
 							>
 								{category}

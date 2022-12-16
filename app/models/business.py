@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from .review import Review
+import random
 
 class Business(db.Model):
     __tablename__ = 'businesses'
@@ -57,7 +58,9 @@ class Business(db.Model):
             'owner': self.owner.to_dict_owner(),
             'avgRating': self.avg_rating(),
             'lat': self.lat,
-            'lng': self.lng
+            'lng': self.lng,
+            'totalReviews': self.total_reviews(),
+            'singleReview': self.get_a_review()
         }
 
     def to_dict_single(self):
@@ -103,6 +106,13 @@ class Business(db.Model):
 
     def total_reviews(self):
         return len(self.business_reviews)
+
+    def get_a_review(self):
+        if self.business_reviews:
+            reviews = [review.to_dict() for review in self.business_reviews]
+            return random.choices(reviews)
+        return []
+
 
 
     def get_all_images_on_business(self):

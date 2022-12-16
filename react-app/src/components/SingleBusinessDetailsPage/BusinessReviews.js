@@ -99,7 +99,7 @@ const BusinessReviews = ({ business }) => {
 					</div>
 				</div>
 			</div>
-			{reviews.map((review) => {
+			{reviews.reverse().map((review) => {
 				const reviewDate = new Date(review.created_at).toLocaleDateString();
 				const show = review.reviewer.id == user?.id;
 				return (

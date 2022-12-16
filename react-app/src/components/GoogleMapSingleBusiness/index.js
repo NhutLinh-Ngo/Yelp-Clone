@@ -71,7 +71,7 @@ const MapPageA = ({ business }) => {
 						<Marker
 							position={currentPosition}
 							title="red-marker"
-							icon={<i class="fa-solid fa-location-dot"></i>}
+							// icon={<i class="fa-solid fa-location-dot"></i>}
 							streetView={false}
 						/>
 					</GoogleMap>

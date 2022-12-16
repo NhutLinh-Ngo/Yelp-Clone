@@ -196,7 +196,7 @@ const BusinessFormPage = () => {
 								onChange={(e) => setState(e.target.value)}
 							>
 								{stateOptions.map((state) => (
-									<option value={state}>{state}</option>
+									<option value={state.value}>{state.label}</option>
 								))}
 							</select>
 							<div className="business-form-error">{errors.state}</div>

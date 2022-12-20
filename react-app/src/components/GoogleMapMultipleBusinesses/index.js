@@ -3,13 +3,15 @@ import {
 	GoogleMap,
 	useJsApiLoader,
 	Marker,
-	InfoWindow
+	InfoWindow,
+	OverlayView
 } from '@react-google-maps/api';
 //This is of course not the raw key but either from getting it from the backend and storing it in redux or in your frontend .env
 import Geocode from 'react-geocode';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBusiness } from '../../store/business';
-
+import './CustomMarker.css';
+import CustomMarker from './OverLayPopUp';
 async function getLocation(address) {
 	return Geocode.fromAddress(address).then(
 		(response) => {
@@ -22,9 +24,9 @@ async function getLocation(address) {
 	);
 }
 
-const GoogleMapAllBusiness = ({ businesses }) => {
-	console.log('hellooooooooo');
+const GoogleMapAllBusiness = ({ businesses, selectedBusiness }) => {
 	const [currentPosition, setCurrentPosition] = useState([]);
+	const [mapLoaded, setMapLoaded] = useState(false);
 	const dispatch = useDispatch();
 	Geocode.setApiKey(process.env.REACT_APP_MAPS_KEY);
 	// set response language. Defaults to english.
@@ -44,7 +46,8 @@ const GoogleMapAllBusiness = ({ businesses }) => {
 				const location = await getLocation(
 					`${business.address}, ${business.city}`
 				);
-				allLocation.push(location);
+				business.location = location;
+				allLocation.push(business);
 			}
 			setCurrentPosition(allLocation);
 		};
@@ -70,7 +73,7 @@ const GoogleMapAllBusiness = ({ businesses }) => {
 		setMap(null);
 	}, []);
 
-	console.log(currentPosition);
+	console.log(currentPosition, 'asdfsdfasdfsadfsdf');
 	return (
 		// Important! Always set the container height explicitly
 
@@ -79,11 +82,29 @@ const GoogleMapAllBusiness = ({ businesses }) => {
 				<GoogleMap
 					mapContainerStyle={containerStyle}
 					zoom={12}
-					center={currentPosition[0]}
+					center={currentPosition[0]?.location}
 					onUnmount={onUnmount}
 				>
-					{currentPosition.map((position) => (
-						<Marker position={position} title="red-marker" streetView={false} />
+					{/* {currentPosition.map((position) => (
+						<Marker
+							position={position}
+							title="red-marker"
+							streetView={false}
+							icon={<i class="fa-solid fa-location-pin" />}
+						/>
+					))} */}
+					{currentPosition.map((business, i) => (
+						<OverlayView
+							position={business.location}
+							mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+						>
+							<CustomMarker
+								business={business}
+								key={i}
+								idx={i}
+								selectedBusiness={selectedBusiness}
+							/>
+						</OverlayView>
 					))}
 				</GoogleMap>
 			)}

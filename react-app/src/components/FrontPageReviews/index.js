@@ -15,10 +15,8 @@ const FrontPageReviews = () => {
 	useEffect(() => {
 		const get = async () => {
 			const allReviews = await dispatch(getAllReviews());
-			let shuffled = allReviews.sort(function () {
-				return 0.5 - Math.random();
-			});
-			setSelected(shuffled.slice(0, allReviews.length));
+			let shuffled = allReviews.reverse();
+			setSelected(shuffled.slice(0, 9));
 		};
 		get();
 	}, []);

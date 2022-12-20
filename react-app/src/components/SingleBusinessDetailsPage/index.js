@@ -34,7 +34,7 @@ const SingleBusinessDetailsPage = () => {
 			let shuffled = data.allImages.sort(function () {
 				return 0.5 - Math.random();
 			});
-			setBusinessImages(shuffled.slice(0, data.allImages.length));
+			setBusinessImages(shuffled.slice(0, 7));
 
 			// Get business categories
 			const businessCategories = data.business_type.split(',');

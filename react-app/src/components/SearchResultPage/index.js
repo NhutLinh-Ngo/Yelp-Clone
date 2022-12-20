@@ -48,14 +48,15 @@ const SearchResultPage = () => {
 				}
 			});
 			let numPage = Math.ceil(foundBusinessses.length / 4);
-			setNumPage(new Array(numPage).fill(null));
 			setFilteredBusinesses(foundBusinessses.slice(0, 4));
+			setNumPage(new Array(numPage).fill(null));
 			setFoundBusinesses(foundBusinessses);
 		}
 	}, [allBusinesses.length, keyword, loc]);
 
 	useEffect(() => {
-		setFilteredBusinesses(foundBusinesses.slice(page, page + 4));
+		if (foundBusinesses.length)
+			setFilteredBusinesses(foundBusinesses.slice(page, page + 4));
 	}, [page]);
 
 	return (
@@ -73,14 +74,15 @@ const SearchResultPage = () => {
 								Looks like we could not understand your search keyword(s),
 								please try again{`:)`}
 							</div>
-						) : null}
-						{filteredBusinesses.map((business) => (
-							<ResultBusinessCard
-								business={business}
-								loc={loc}
-								setSelectedBusiness={setSelectedBusiness}
-							/>
-						))}
+						) : (
+							filteredBusinesses.map((business) => (
+								<ResultBusinessCard
+									business={business}
+									loc={loc}
+									setSelectedBusiness={setSelectedBusiness}
+								/>
+							))
+						)}
 					</div>
 					<div className="result-page-pagination-wrapper">
 						<div className="result-page-pagination-number">

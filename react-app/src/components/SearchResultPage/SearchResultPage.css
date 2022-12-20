@@ -86,3 +86,55 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
+.red-red{
+    color: black;
+}
+
+.search-result-error{
+    width: 80%;
+    height: 70%;
+    font-size: 1.3rem;
+}
+.search-result-error > img{
+    height: 100%;
+    width: 100%;
+}
+
+
+.result-page-pagination-wrapper{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ebebeb;
+    /* padding: 2rem; */
+    padding-top: 1rem;
+
+}
+.result-page-pagination-number{
+    display: flex;
+    gap: 1rem;
+}
+.result-page-pagination-num0fpage{
+    color: rgb(100, 100, 100);
+}
+.result-page-pagination-number{
+    color: rgb(100, 100, 100);
+}
+
+.pagination-num{
+    cursor: pointer;
+}
+.pagination-selected{
+    color: black;
+    font-weight: bold;
+    cursor: default;
+}
+
+.page-select{
+    cursor: pointer;
+}
+
+.disable{
+    color: gainsboro;
+    cursor: default;
+}
